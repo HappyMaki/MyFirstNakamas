@@ -13,6 +13,7 @@ services:
     ports:
       - "26257:26257"
       - "8080:8080"
+
   nakama:
     container_name: nakama
     image: heroiclabs/nakama:2.11.1
@@ -21,7 +22,7 @@ services:
       - "-ecx"
       - >
           /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
-          exec /nakama/nakama --name nakama1 --database.address root@cockroachdb:26257
+          exec /nakama/nakama --name nakama1 --database.address root@cockroachdb:26257 --config data/conf/config.yml
     restart: always
     links:
       - "cockroachdb:db"
@@ -42,5 +43,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-volumes:
-  data:

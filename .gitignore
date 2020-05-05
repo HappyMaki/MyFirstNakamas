@@ -6,6 +6,8 @@ Assets/Suriyun/
 Assets/UltimateCleanGUIPack/
 Assets/Credits/
 Server/data/
+Server/Temp/
+Server/Library/
 
 .collabignore
 /.vscode/
