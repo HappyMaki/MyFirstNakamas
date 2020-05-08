@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HappyMaki/Scenes/1-MainMenu.unity
     guid: a40593739463d994188b903ff4a17e50
+  - enabled: 1
+    path: Assets/UltimateCleanGUIPack/Demo/Scenes/FantasyScenes/Landscape_Fantasy_HomeScene.unity
+    guid: 41cf0a03323334fe79dd8990d2bc262a
+  - enabled: 1
+    path: Assets/UltimateCleanGUIPack/Demo/Scenes/FantasyScenes/Landscape_Fantasy_GameScene.unity
+    guid: cda7d8cddc920482d8194d436ff44888
   m_configObjects: {}

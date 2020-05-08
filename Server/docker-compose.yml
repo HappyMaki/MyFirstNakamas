@@ -30,16 +30,30 @@ services:
       - cockroachdb
     volumes:
       - ./data:/nakama/data
-    expose:
-      - "7349"
-      - "7350"
-      - "7351"
-    ports:
-      - "7349:7349"
-      - "7350:7350"
-      - "7351:7351"
+    # expose:
+    #   - "7349"
+    #   - "7350"
+    #   - "7351"
+    # ports:
+    #   - "7349:7349"
+    #   - "7350:7350"
+    #   - "7351:7351"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7350/"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  web:
+    container_name: nginx
+    image: nginx
+    depends_on:
+      - nakama
+    volumes: 
+      - ./nginx/conf/:/etc/nginx
+    ports:
+      - "80:80"
+      - "17349:17349"
+      - "17350:17350"
+      - "17351:17351"
+    command: [nginx-debug, '-g', 'daemon off;']

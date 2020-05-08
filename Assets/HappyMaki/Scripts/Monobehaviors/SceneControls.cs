@@ -13,7 +13,6 @@ public class SceneControls : MonoBehaviour
 
     void SwitchScenes()
     {
-        Debug.Log("Switching Scenes");
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
 }

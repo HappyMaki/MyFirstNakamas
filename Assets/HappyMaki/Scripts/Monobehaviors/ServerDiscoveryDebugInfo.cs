@@ -6,10 +6,10 @@ using TMPro;
 public class ServerDiscoveryDebugInfo : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    public NakamaClient nakamaClient;
+    public NakamaApi nakamaApi;
 
     private void Start()
     {
-        text.text = "Server discovery... " + nakamaClient.serverIpAddress + ":" + nakamaClient.serverPort.ToString();
+        text.text = "Server discovery... " + nakamaApi.serverIpAddress + ":" + nakamaApi.serverPort.ToString();
     }
 }

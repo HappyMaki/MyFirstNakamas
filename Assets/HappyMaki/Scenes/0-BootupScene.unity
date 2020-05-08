@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1085872403}
-  nakamaClient: {fileID: 57841002}
+  nakamaApi: {fileID: 57841002}
 --- !u!1 &57841000 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6974714289433081399, guid: e212c4d45e383c448af9b2f82af8be6f,
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverIpAddress: 127.0.0.1
-  serverPort: 7350
+  serverPort: 17350
 --- !u!1 &496368463
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1877457898
 MonoBehaviour:
@@ -789,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 6974714289433081398, guid: e212c4d45e383c448af9b2f82af8be6f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6974714289433081398, guid: e212c4d45e383c448af9b2f82af8be6f,
         type: 3}
@@ -809,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 6974714289433081399, guid: e212c4d45e383c448af9b2f82af8be6f,
         type: 3}
       propertyPath: m_Name
-      value: NakamaClient
+      value: NakamaApi
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e212c4d45e383c448af9b2f82af8be6f, type: 3}
