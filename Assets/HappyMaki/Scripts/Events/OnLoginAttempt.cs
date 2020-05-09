@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class OnAccountCreation : UnityEvent<AccountRegisterResolution>
+public class OnLoginAttempt : UnityEvent<AccountLoginResolution>
 {
 
 }

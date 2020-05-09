@@ -9,10 +9,23 @@ public class SceneControls : MonoBehaviour
     void Start()
     {
         EventManager.onServerDiscovery.AddListener(SwitchScenes);
+        EventManager.onLoginAttempt.AddListener(SwitchScenes);
     }
 
     void SwitchScenes()
     {
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+    }
+    void SwitchScenes(AccountLoginResolution resolution)
+    {
+        switch (resolution)
+        {
+            case AccountLoginResolution.SUCCESS:
+                SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+                break;
+
+            default:
+                break;
+        }
     }
 }

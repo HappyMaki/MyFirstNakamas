@@ -935,6 +935,7 @@ GameObject:
   - component: {fileID: 7895868432470741471}
   - component: {fileID: 2540409670383457656}
   - component: {fileID: 8491419878959459916}
+  - component: {fileID: 5829035098593596768}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1159,6 +1160,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5829035098593596768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350291244061484239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a36da76b1214b1bb1fba58c59d6ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 3955664213225828342, guid: a6ea68d2ec0ad0746a5e3a482bdb0d20,
+    type: 3}
 --- !u!1 &8350291244189434328
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,6 +3234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputFieldAccount: {fileID: 8350291245086369214}
   _inputFieldPassword: {fileID: 8350291245033500596}
+  parentPopup: {fileID: -5749119206850633787}
+  debugPopupOpener: {fileID: 5829035098593596768}
 --- !u!1 &8350291245828058908
 GameObject:
   m_ObjectHideFlags: 0

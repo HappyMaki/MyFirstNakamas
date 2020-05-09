@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Gamevanilla;
 using Nakama;
+using UnityEngine.UI;
 
 public class NakamaRegisterPopup : MonoBehaviour
 {
@@ -14,25 +15,47 @@ public class NakamaRegisterPopup : MonoBehaviour
 
     public Popup parentPopup;
     public PopupOpener debugPopupOpener;
+    public Image boyBorder;
+    public Image girlBorder;
+    public PlayerGender gender;
+    
 
     NakamaApi nakama;
 
-    private void Start()
+    void Start()
     {
         nakama = FindObjectOfType<NakamaApi>();
         EventManager.onAccountCreation.AddListener(HandleOnAccountCreation);
+        if (Random.Range(1, 2) == 1)
+            SetGenderFemale();
+        else
+            SetGenderMale();
     }
 
-    private void HandleOnAccountCreation(AccountCreationResolution resolution)
+    public void SetGenderMale()
+    {
+        boyBorder.color = Color.yellow;
+        girlBorder.color = Color.gray;
+        gender = PlayerGender.MALE;
+    }
+
+    public void SetGenderFemale()
+    {
+        girlBorder.color = Color.yellow;
+        boyBorder.color = Color.gray;
+        gender = PlayerGender.FEMALE;
+    }
+
+    void HandleOnAccountCreation(AccountRegisterResolution resolution)
     {
         switch (resolution)
         {
-            case AccountCreationResolution.SUCCESS:
+            case AccountRegisterResolution.SUCCESS:
                 parentPopup.Close();
                 debugPopupOpener.OpenPopup();
                 break;
 
-            case AccountCreationResolution.FAILED:
+            case AccountRegisterResolution.FAILED:
                 debugPopupOpener.OpenPopup();
                 break;
 
@@ -65,10 +88,9 @@ public class NakamaRegisterPopup : MonoBehaviour
             return;
         }
 
-
-        nakama.Register(_inputFieldName.text, _inputFieldEmail.text, _inputFieldPassword.text);
-        
+        nakama.Register(_inputFieldName.text, _inputFieldEmail.text, _inputFieldPassword.text, gender);
     }
 
+    
 
 }
