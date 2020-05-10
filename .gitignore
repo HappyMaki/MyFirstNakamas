@@ -5,14 +5,10 @@ Assets/Nakama/
 Assets/Suriyun/
 Assets/UltimateCleanGUIPack/
 Assets/Credits/
-Server/data/log/
-Server/data/tmp/
 Server/Temp/
 Server/Library/
-Server/data/cockroach/logs/
+Server/data/
 
-Server/data/.cookie
-Server/data/logfile.log
 .collabignore
 /.vscode/
 /.vs/
