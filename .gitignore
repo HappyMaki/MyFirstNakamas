@@ -8,6 +8,7 @@ Assets/Credits/
 Server/Temp/
 Server/Library/
 Server/data/
+Server/data/cockroach
 
 .collabignore
 /.vscode/
