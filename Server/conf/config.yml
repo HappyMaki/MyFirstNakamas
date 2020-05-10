@@ -22,7 +22,7 @@ database:
 runtime:
   env:
     - "encryptionkey=A_]&+D7♥{Ph&~-¿^g}52"
-  path: "data/modules"
+  path: "modules"
   http_key: "XiHe41dci9"
 
 socket:

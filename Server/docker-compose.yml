@@ -31,7 +31,7 @@ services:
     volumes:
       - ./data:/nakama/data
       - ./conf:/nakama/conf
-      - ./modules:/nakama/data/modules
+      - ./modules:/nakama/modules
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7350/"]
       interval: 10s
