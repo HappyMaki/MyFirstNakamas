@@ -22,7 +22,7 @@ services:
       - "-ecx"
       - >
           /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
-          exec /nakama/nakama --name nakama1 --database.address root@cockroachdb:26257 --config data/conf/config.yml
+          exec /nakama/nakama --name nakama1 --database.address root@cockroachdb:26257 --config conf/config.yml
     restart: always
     links:
       - "cockroachdb:db"
@@ -30,14 +30,8 @@ services:
       - cockroachdb
     volumes:
       - ./data:/nakama/data
-    # expose:
-    #   - "7349"
-    #   - "7350"
-    #   - "7351"
-    # ports:
-    #   - "7349:7349"
-    #   - "7350:7350"
-    #   - "7351:7351"
+      - ./conf:/nakama/conf
+      - ./modules:/nakama/data/modules
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7350/"]
       interval: 10s
@@ -50,7 +44,7 @@ services:
     depends_on:
       - nakama
     volumes: 
-      - ./nginx/conf/:/etc/nginx
+      - ./conf/:/etc/nginx
     ports:
       - "80:80"
       - "17349:17349"

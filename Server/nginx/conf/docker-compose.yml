@@ -1,8 +1,0 @@
-web:
-  container_name: nginx
-  image: nginx
-  volumes:
-    - ./:/etc/nginx/conf
-  ports:
-    - "14142:14142"
-  command: [nginx-debug, '-g', 'daemon off;']

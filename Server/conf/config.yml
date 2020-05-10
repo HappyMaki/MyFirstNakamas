@@ -10,7 +10,7 @@ metrics:
   reporting_freq_sec: 60
   namespace: ""
   stackdriver_projectid: ""
-  prometheus_port: 0
+  prometheus_port: 0 
 
 database:
   address:
