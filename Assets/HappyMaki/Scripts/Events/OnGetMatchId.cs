@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class OnRoomJoin : UnityEvent<string>
+public class OnGetMatchId : UnityEvent<MatchJoinResponse>
 {
 
 }

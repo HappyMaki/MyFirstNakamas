@@ -12,16 +12,19 @@ public class SceneControls : MonoBehaviour
     {
         nakama = FindObjectOfType<NakamaApi>();
 
-        EventManager.onServerDiscovery.AddListener(SwitchScenes);
-        EventManager.onLoginAttempt.AddListener(SwitchScenes);
-        EventManager.onRoomJoin.AddListener(JoinNetworkScene);
+        EventManager.onServerDiscovery.AddListener(SwitchScenes); //This only runs locally before we connect
+        EventManager.onLoginAttempt.AddListener(HandleNetworkLogin); //This only runs locally before we connect
+
+        EventManager.onGetMatchId.AddListener(JoinNetworkScene);
+        EventManager.onRoomJoin.AddListener(SwitchNetworkScenes);
     }
 
     void SwitchScenes()
     {
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
-    void SwitchScenes(AccountLoginResolution resolution)
+
+    void HandleNetworkLogin(AccountLoginResolution resolution)
     {
         if (resolution == AccountLoginResolution.SUCCESS)
         {
@@ -30,10 +33,19 @@ public class SceneControls : MonoBehaviour
         }
     }
 
+    void SwitchNetworkScenes(string scene)
+    {
+        if (nextScene != scene) //if more than one door exists
+            return;
+
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+
     void JoinNetworkScene(MatchJoinResponse response)
     {
         string matchId = response.payload;
         Debug.Log("Joining room: " + matchId);
+        nakama.JoinMatchIdAsync(matchId, nextScene);
     }
 
     

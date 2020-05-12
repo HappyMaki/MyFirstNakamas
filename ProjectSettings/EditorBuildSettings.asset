@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/HappyMaki/Scenes/1-MainMenu.unity
     guid: a40593739463d994188b903ff4a17e50
   - enabled: 1
+    path: Assets/HappyMaki/Scenes/Kerfuffle.unity
+    guid: 1c1eaff56e9032546a16d221922498e3
+  - enabled: 1
     path: Assets/HappyMaki/Scenes/Lentils.unity
     guid: b2b700cf11bb5864480aa96bfe7b0191
+  - enabled: 1
+    path: Assets/HappyMaki/Scenes/Legume.unity
+    guid: da65fd111738c01438b1aa1f60f0580f
   m_configObjects: {}

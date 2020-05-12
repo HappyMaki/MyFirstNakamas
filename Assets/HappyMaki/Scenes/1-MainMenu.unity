@@ -11616,7 +11616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9998d4608b9c14c4fb0868a400b1b75a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: Lentils
+  nextScene: Kerfuffle
 --- !u!4 &2127968590
 Transform:
   m_ObjectHideFlags: 0

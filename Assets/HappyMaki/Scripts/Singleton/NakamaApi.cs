@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Nakama;
 using UnityEngine.Networking;
@@ -9,26 +10,56 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     public string serverIpAddress;
     public int serverPort;
 
+    bool authed = false;
     const string server_key = "ZdsG11p&y13zl6a";
     const string http_key = "XiHe41dci9";
 
+    ISocket matchSocket = null;
 
     string deviceId;
     Client client;
     ISession session;
+    IMatch match;
+    string activeSceneMatchId;
     string server_url;
 
+
+    public ISocket MatchSocket
+    {
+        get { return matchSocket; }
+    }
+    
     void Start()
     {
         deviceId = SystemInfo.deviceUniqueIdentifier;
         client = new Client("http", serverIpAddress, serverPort, server_key);
         ServerDiscovery();
 
-
     }
 
+    private async void OnDestroy()
+    {
+        if (matchSocket != null)
+            await matchSocket.LeaveMatchAsync(match);
+    }
 
+    public async void JoinMatchIdAsync(string matchId, string nextScene)
+    {
+        if (matchSocket == null)
+        {
+            matchSocket = client.NewSocket();
+            await matchSocket.ConnectAsync(session);
+            //matchSocket.ReceivedMatchState += (state) => Debug.Log(System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length));
+        }
+        activeSceneMatchId = matchId;
+        match = await matchSocket.JoinMatchAsync(matchId);
+        EventManager.onRoomJoin.Invoke(nextScene);
 
+        //foreach (var presence in match.Presences)
+        //{
+        //    Debug.LogFormat("User id '{0}' name '{1}'.", presence.UserId, presence.Username);
+        //}
+    }
 
     public IEnumerator RPC_GetMatchID(string label)
     {
@@ -38,7 +69,6 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("Accept", "application/json");
         string dataJsonString = "\"{\\\"modulename\\\": \\\"match\\\",\\\"label\\\": \\\"" + label + "\\\" }\"";
-        Debug.Log(dataJsonString);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(dataJsonString);
         UploadHandler uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.uploadHandler = uploadHandler;
@@ -53,7 +83,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         {
             //    Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
             MatchJoinResponse response = JsonUtility.FromJson<MatchJoinResponse>(request.downloadHandler.text);
-            EventManager.onRoomJoin.Invoke(response);
+            EventManager.onGetMatchId.Invoke(response);
         }
     }
 
@@ -112,9 +142,9 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     {
         try
         {
-            Debug.Log("Login: " + account + ", " + password);
+            //Debug.Log("Login: " + account + ", " + password);
             session = await client.AuthenticateEmailAsync(account, password, username: name, create: false);
-            //GetPlayerCharacterInfo();
+            authed = true;
 
             EventManager.onLoginAttempt.Invoke(AccountLoginResolution.SUCCESS);
             DebugInfo.SetToast("Login Success", "Entering the world!");

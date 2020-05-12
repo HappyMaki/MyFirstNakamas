@@ -14,6 +14,8 @@ local function join_match(context, payload)
   if #matches > 0 then
     for _, m in ipairs(matches)
     do
+      print("found matchid")
+      print(m.match_id)
       return m.match_id
     end
   end
@@ -21,7 +23,9 @@ local function join_match(context, payload)
   local modulename = decoded.modulename
   local setupstate = { initialstate = decoded }
   local matchid = nk.match_create(modulename, setupstate)
-
+  
+  print("creating match yes")
+  print(matchid)
   return matchid
 end
 
