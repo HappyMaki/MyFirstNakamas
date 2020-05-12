@@ -8,6 +8,8 @@ public class EventManager
     public static OnServerDiscovery onServerDiscovery = new OnServerDiscovery();
     public static OnAccountCreation onAccountCreation = new OnAccountCreation();
     public static OnLoginAttempt onLoginAttempt = new OnLoginAttempt();
+    public static OnRoomJoin onRoomJoin = new OnRoomJoin();
+
     private EventManager() { }
 
     public static IEnumerator DelayInvoke(float delay, UnityEvent e)

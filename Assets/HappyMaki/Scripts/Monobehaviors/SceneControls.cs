@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 public class SceneControls : MonoBehaviour
 {
     public string nextScene;
+    NakamaApi nakama;
+
     void Start()
     {
+        nakama = FindObjectOfType<NakamaApi>();
+
         EventManager.onServerDiscovery.AddListener(SwitchScenes);
         EventManager.onLoginAttempt.AddListener(SwitchScenes);
+        EventManager.onRoomJoin.AddListener(JoinNetworkScene);
     }
 
     void SwitchScenes()
@@ -18,14 +23,18 @@ public class SceneControls : MonoBehaviour
     }
     void SwitchScenes(AccountLoginResolution resolution)
     {
-        switch (resolution)
+        if (resolution == AccountLoginResolution.SUCCESS)
         {
-            case AccountLoginResolution.SUCCESS:
-                SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
-                break;
-
-            default:
-                break;
+            //JoinNetworkScene(nextScene, LoadSceneMode.Single);
+            StartCoroutine(nakama.RPC_GetMatchID(nextScene));
         }
     }
+
+    void JoinNetworkScene(MatchJoinResponse response)
+    {
+        string matchId = response.payload;
+        Debug.Log("Joining room: " + matchId);
+    }
+
+    
 }

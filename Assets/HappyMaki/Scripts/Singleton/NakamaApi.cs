@@ -1,27 +1,63 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Nakama;
 using UnityEngine.Networking;
+
 
 public class NakamaApi : SingletonBehaviour<NakamaApi>
 {
     public string serverIpAddress;
     public int serverPort;
 
+    const string server_key = "ZdsG11p&y13zl6a";
+    const string http_key = "XiHe41dci9";
+
+
     string deviceId;
     Client client;
     ISession session;
-    
+    string server_url;
+
     void Start()
     {
         deviceId = SystemInfo.deviceUniqueIdentifier;
-        client = new Client("http", serverIpAddress, serverPort, "ZdsG11p&y13zl6a");
+        client = new Client("http", serverIpAddress, serverPort, server_key);
         ServerDiscovery();
 
 
     }
 
+
+
+
+    public IEnumerator RPC_GetMatchID(string label)
+    {
+        string endpoint = server_url + "/v2/rpc/join_match_rpc?http_key=" + http_key;
+
+        var request = new UnityWebRequest(endpoint, "POST");
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Accept", "application/json");
+        string dataJsonString = "\"{\\\"modulename\\\": \\\"match\\\",\\\"label\\\": \\\"" + label + "\\\" }\"";
+        Debug.Log(dataJsonString);
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(dataJsonString);
+        UploadHandler uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.uploadHandler = uploadHandler;
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer(); 
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error" + request.error + ": " + request.downloadHandler.text);
+        }
+        else
+        {
+            //    Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
+            MatchJoinResponse response = JsonUtility.FromJson<MatchJoinResponse>(request.downloadHandler.text);
+            EventManager.onRoomJoin.Invoke(response);
+        }
+    }
+
+    #region MainMenu
     void ServerDiscovery()
     {
         StartCoroutine(PingServer());
@@ -29,7 +65,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
 
     IEnumerator PingServer()
     {
-        string server_url = "http://" + serverIpAddress + ":" + serverPort.ToString();
+        server_url = "http://" + serverIpAddress + ":" + serverPort.ToString();
         UnityWebRequest resp = UnityWebRequest.Get(server_url);
         yield return resp.SendWebRequest();
 
@@ -102,6 +138,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         };
         StoreData(obj);
     }
+    #endregion
 
     void GetPlayerCharacterInfo()
     {
