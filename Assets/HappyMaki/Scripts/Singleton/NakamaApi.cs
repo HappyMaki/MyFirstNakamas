@@ -23,6 +23,10 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     string activeSceneMatchId;
     string server_url;
 
+    public IMatch Match
+    {
+        get { return match; }
+    }
 
     public ISocket MatchSocket
     {
@@ -49,7 +53,6 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         {
             matchSocket = client.NewSocket();
             await matchSocket.ConnectAsync(session);
-            //matchSocket.ReceivedMatchState += (state) => Debug.Log(System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length));
         }
         activeSceneMatchId = matchId;
         match = await matchSocket.JoinMatchAsync(matchId);
