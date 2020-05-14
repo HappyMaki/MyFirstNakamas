@@ -27,19 +27,23 @@ function M.match_join(context, dispatcher, tick, state, presences)
   print("someone match_join!")
   for _, presence in ipairs(presences) do
     state.presences[presence.user_id] = presence
+    local user_id = presence.user_id
+    local object_ids = {
+      {collection = "character", key = "location", user_id = user_id}
+    }
+    local objects = nk.storage_read(object_ids)
+    if #objects == 1 then
+      for _, r in ipairs(objects)
+      do
+        -- local message = ("read: %q, write: %q, value: %q"):format(r.permission_read, r.permission_write, r.value)
+        state.presences[presence.user_id].data = r.value
+      end
+    else
+      state.presences[presence.user_id].data = {position= {x= 6.215908527374268, y= 0.005000054836273193, z= 5.161622047424316}, rotation= {w= 0.9507779479026794, x= 0, y= -0.3098730444908142, z= 0}, scale= {x= 1, y= 1, z= 1}}
+    end
 
-    -- local user_id = "e2543db4-ea05-4a3b-be77-e13db8df9881" -- some user ID.
-    -- local object_ids = {
-    --   {collection = "character", key = "location", user_id = user_id}
-    -- }
-    -- local objects = nk.storage_read(object_ids)
-    -- for _, r in ipairs(objects)
-    -- do
-    --   local message = ("read: %q, write: %q, value: %q"):format(r.permission_read, r.permission_write, r.value)
-    --   dispatcher.broadcast_message(OP_LOGIN_POSITION, nk.json_encode(r.value), {presence.user_id})
-    -- end
+    
   end
-  print("return")
   return state
 end
 
@@ -48,7 +52,7 @@ function M.match_leave(context, dispatcher, tick, state, presences)
   for _, presence in ipairs(presences) do
     local user_id = presence.user_id
     local new_objects = {
-      {collection = "character", key = "location", user_id = user_id, value = state.presences[presence.user_id]},
+      {collection = "character", key = "location", user_id = user_id, value = state.presences[presence.user_id].data},
     }
     nk.storage_write(new_objects)
     state.presences[presence.user_id] = nil

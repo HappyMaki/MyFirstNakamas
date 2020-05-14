@@ -17,7 +17,6 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
     ISession session;
     string userId;
 
-    String gameState;
 
     Dictionary<string, PlayerDataResponse> playerData = new Dictionary<string, PlayerDataResponse>();
 
@@ -82,9 +81,9 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
             {
                 case 1:
                     string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
-                    gameState = data_json_string;
+                    Debug.Log(data_json_string);
 
-                    Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(gameState);
+                    Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(data_json_string);
                     foreach (KeyValuePair<string, object> entry in player_data)
                     {
                         Dictionary<string, object> client = (Dictionary<string, object>)entry.Value;
@@ -95,6 +94,7 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
                         playerData[pData.userId] = pData;
                     }
                     break;
+
 
                 default:
                     break;
