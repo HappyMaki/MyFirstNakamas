@@ -9,7 +9,7 @@ function M.match_init(context, setupstate)
     presences = {},
     positions = {}
   }
-  local tickrate = 1 -- per sec
+  local tickrate = 30 -- per sec
   local label = setupstate.initialstate.label
   return gamestate, tickrate, label
 end
@@ -43,9 +43,9 @@ function M.match_leave(context, dispatcher, tick, state, presences)
 end
 
 function M.match_loop(context, dispatcher, tick, state, messages)
-  for _, presence in pairs(state.presences) do
-    print(("Presence %s named %s"):format(presence.user_id, presence.username))
-  end
+  -- for _, presence in pairs(state.presences) do
+  --   print(("Presence %s named %s"):format(presence.user_id, presence.username))
+  -- end
   for _, message in ipairs(messages) do
     -- print(("Received %s from %s"):format(message.data, message.sender.username))
     local decoded = nk.json_decode(message.data)

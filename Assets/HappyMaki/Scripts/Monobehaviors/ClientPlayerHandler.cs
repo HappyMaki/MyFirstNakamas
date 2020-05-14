@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpawner : MonoBehaviour
+public class ClientPlayerHandler : MonoBehaviour
 {
     public GameObject localPlayerPrefab;
     public GameObject remotePlayerPrefab;
@@ -75,9 +75,22 @@ public class PlayerSpawner : MonoBehaviour
         if (localPlayer)
             nakamaDataRelay.SendData(localPlayer);
 
-        if (nakamaDataRelay.GameState != null)
+        if (nakamaDataRelay.PlayerData != null)
         {
-
+            Dictionary<string, PlayerDataResponse> playerDataCopy = new Dictionary<string, PlayerDataResponse>(nakamaDataRelay.PlayerData);
+            foreach (KeyValuePair<string, PlayerDataResponse> entry in playerDataCopy)
+            {
+                if (entry.Key == nakamaDataRelay.ClientId)
+                {
+                    continue;
+                }
+                if (remotePlayers.ContainsKey(entry.Key))
+                {
+                    remotePlayers[entry.Key].transform.position = entry.Value.position;
+                    remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
+                    remotePlayers[entry.Key].transform.localScale = entry.Value.scale;
+                }
+            }
         }
     }
 

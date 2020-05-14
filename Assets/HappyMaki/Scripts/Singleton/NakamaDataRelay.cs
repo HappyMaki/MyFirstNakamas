@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MiniJSON;
 
 //This class is intended to exist only once per scene. It manages the remote game objects and transmits/receives data from the nakama server
 public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
@@ -18,6 +19,7 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
 
     String gameState;
 
+    Dictionary<string, PlayerDataResponse> playerData = new Dictionary<string, PlayerDataResponse>();
 
     private void Start()
     {
@@ -26,34 +28,20 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
         match = nakama.Match;
         session = nakama.Session;
         userId = session.UserId;
+        Debug.Log("My Client ID is " + userId);
 
         EventManager.onLocalConnectedPlayer.Invoke();
 
-        Debug.Log("My Client ID is " + userId);
 
         AddReceivedMatchPresenceListener();
         AddReceivedMatchStateListener();
-    }
 
-    public string GameState
-    {
-        get { return gameState; }
-    }
-
-    public string ClientId
-    {
-        get { return userId; }
-    }
-
-    public ISession Session
-    {
-        get { return session; }
     }
 
     public void SendData(GameObject obj)
     {
         long opCode = 1;
-        string payload = JsonUtility.ToJson(new PlayerPayload(obj.transform));
+        string payload = JsonUtility.ToJson(new PlayerDataRequest(obj));
         string newState = new Dictionary<string, string> { { "payload", payload } }.ToJson();
         socket.SendMatchStateAsync(match.Id, opCode, newState);
     }
@@ -85,15 +73,39 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
         }
     }
 
+
     void AddReceivedMatchStateListener()
     {
         socket.ReceivedMatchState += (state) =>
         {
             string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
-            Debug.Log(data_json_string);
             gameState = data_json_string;
+
+            Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(gameState);
+            foreach (KeyValuePair<string, object> entry in player_data)
+            {
+                Dictionary<string, object> client = (Dictionary<string, object>)entry.Value;
+                object data = (Dictionary<string, object>)client["data"];
+                PlayerDataResponse pData = JsonUtility.FromJson<PlayerDataResponse>(Json.Serialize(data)); //TODO: I'm doing an extra serial/deserialize to just get it working. Fix later.
+                pData.name = (string)client["username"];
+                pData.userId = (string)client["user_id"];
+                playerData[pData.userId] = pData;
+            }
         };
     }
 
+    public Dictionary<string, PlayerDataResponse> PlayerData
+    {
+        get { return playerData; }
+    }
 
+    public string ClientId
+    {
+        get { return userId; }
+    }
+
+    public ISession Session
+    {
+        get { return session; }
+    }
 }
