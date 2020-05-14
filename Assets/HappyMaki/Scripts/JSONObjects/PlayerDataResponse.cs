@@ -17,5 +17,5 @@ public class PlayerDataResponse
     public bool IsGrounded;
     public bool IsStrafing;
     public bool IsSprinting;
-
+    public string gender;
 }

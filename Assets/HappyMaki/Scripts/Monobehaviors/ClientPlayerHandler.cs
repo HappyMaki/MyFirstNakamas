@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class ClientPlayerHandler : MonoBehaviour
 {
-    public GameObject localPlayerPrefab;
+    public GameObject localMalePlayerPrefab;
+    public GameObject localFemalePlayerPrefab;
     public GameObject remotePlayerPrefab;
+    public static PlayerGender localPlayerGender;
 
     GameObject localPlayer;
     NakamaDataRelay nakamaDataRelay;
@@ -30,10 +32,24 @@ public class ClientPlayerHandler : MonoBehaviour
         remotePlayersToDestroy.Add(presence.UserId);
     }
 
-    void SpawnLocalPlayer(Vector3 position, Quaternion rotation)
+    void SpawnLocalPlayer(Vector3 position, Quaternion rotation, PlayerGender gender)
     {
-        localPlayer = Instantiate(localPlayerPrefab, position, rotation);
-        localPlayer.name = nakamaDataRelay.ClientId;
+        switch (gender)
+        {
+            case PlayerGender.MALE:
+                localPlayer = Instantiate(localMalePlayerPrefab, position, rotation);
+                localPlayer.name = nakamaDataRelay.ClientId;
+                break;
+
+            case PlayerGender.FEMALE:
+                localPlayer = Instantiate(localFemalePlayerPrefab, position, rotation);
+                localPlayer.name = nakamaDataRelay.ClientId;
+                break;
+
+            default:
+                break;
+        }
+        
     }
 
     void SpawnRemotePlayer(IUserPresence presence)
@@ -80,9 +96,8 @@ public class ClientPlayerHandler : MonoBehaviour
                 {
                     if (!initialized)
                     {
-                        Debug.Log(entry.Value.position);
-                        //localPlayer.transform.position = new Vector3(entry.Value.position.x, entry.Value.position.y + 0.2f, entry.Value.position.z);
-                        SpawnLocalPlayer(entry.Value.position, entry.Value.rotation);
+                        localPlayerGender = (PlayerGender)System.Enum.Parse(typeof(PlayerGender), entry.Value.gender);
+                        SpawnLocalPlayer(entry.Value.position, entry.Value.rotation, localPlayerGender);
                         localPlayer.transform.position = entry.Value.position;
                         localPlayer.transform.rotation = entry.Value.rotation;
                         localPlayer.transform.localScale = entry.Value.scale;

@@ -9,6 +9,8 @@ using MiniJSON;
 //This class is intended to exist only once per scene. It manages the remote game objects and transmits/receives data from the nakama server
 public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
 {
+    public bool debugPackets;
+
     List<IUserPresence> connectedOpponents = new List<IUserPresence>(2);
 
     NakamaApi nakama;
@@ -81,7 +83,8 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
             {
                 case 1:
                     string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
-                    //Debug.Log(data_json_string);
+                    if (debugPackets)
+                        Debug.Log(data_json_string);
 
                     Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(data_json_string);
                     foreach (KeyValuePair<string, object> entry in player_data)

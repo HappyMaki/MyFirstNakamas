@@ -15,7 +15,7 @@ public class PlayerDataRequest
     public bool IsGrounded;
     public bool IsStrafing;
     public bool IsSprinting;
-
+    public PlayerGender gender;
 
     public PlayerDataRequest(GameObject obj)
     {
@@ -32,5 +32,7 @@ public class PlayerDataRequest
         position = t.position;
         rotation = t.rotation;
         scale = t.localScale;
+
+        gender = ClientPlayerHandler.localPlayerGender;
     }
 }

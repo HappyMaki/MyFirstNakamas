@@ -1199,7 +1199,7 @@ GameObject:
   - component: {fileID: 816543615}
   - component: {fileID: 816543616}
   m_Layer: 0
-  m_Name: PlayerSpawner
+  m_Name: PlayerHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1231,7 +1231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1281e57d6b085e47b81779b35187a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayerPrefab: {fileID: 7995794232411568716, guid: 5158f0d57d2cfb6469822e6a85bc883e,
+  localMalePlayerPrefab: {fileID: 7995794232411568716, guid: 5158f0d57d2cfb6469822e6a85bc883e,
+    type: 3}
+  localFemalePlayerPrefab: {fileID: 2739483769884530851, guid: fb7b02a6af7754b41b629fd20548800e,
     type: 3}
   remotePlayerPrefab: {fileID: 8843746029932806932, guid: 6631921fd3f6153499aa3a03917cb5fa,
     type: 3}
@@ -4697,6 +4699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32f2a0634cc7d84087be687e346452b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugPackets: 0
 --- !u!4 &1862024495
 Transform:
   m_ObjectHideFlags: 0

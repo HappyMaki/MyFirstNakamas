@@ -45,7 +45,7 @@ public class NakamaLoginPopup : MonoBehaviour
 
     public void LoginBrandon()
     {
-        nakama.Login("brandonlingatl@gmail.com", "qweasdqweasd");
+        nakama.Login("brandon@gmail.com", "qweasdqweasd");
     }
 
     public void LoginHelen()

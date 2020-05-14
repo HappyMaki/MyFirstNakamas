@@ -27,6 +27,8 @@ function M.match_join(context, dispatcher, tick, state, presences)
   print("someone match_join!")
   for _, presence in ipairs(presences) do
     state.presences[presence.user_id] = presence
+
+    -- Pull character last logoff location
     local user_id = presence.user_id
     local object_ids = {
       {collection = "character", key = "location", user_id = user_id}
@@ -35,11 +37,20 @@ function M.match_join(context, dispatcher, tick, state, presences)
     if #objects == 1 then
       for _, r in ipairs(objects)
       do
-        -- local message = ("read: %q, write: %q, value: %q"):format(r.permission_read, r.permission_write, r.value)
         state.presences[presence.user_id].data = r.value
       end
-    else
+    else -- Set default spawn point
       state.presences[presence.user_id].data = {position= {x= 6.0, y= 0.01, z= 5.0}, rotation= {w= 0.95, x= 0, y= -0.31, z= 0}, scale= {x= 1, y= 1, z= 1}}
+    end
+
+    -- Pull character gender
+    local object_gender_ids = {
+      {collection = "character", key = "base", user_id = user_id}
+    }
+    local gender_objects = nk.storage_read(object_gender_ids)
+    for _, r in ipairs(gender_objects)
+    do
+      state.presences[presence.user_id].data.gender = r.value.Gender
     end
 
     
