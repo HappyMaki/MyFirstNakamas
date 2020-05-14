@@ -12,6 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     NakamaDataRelay nakamaDataRelay;
 
     List<string> remotePlayersToSpawn = new List<string>();
+    List<string> remotePlayersToDestroy = new List<string>();
     Dictionary<string, GameObject> remotePlayers = new Dictionary<string, GameObject>();
 
     private void Start()
@@ -25,9 +26,7 @@ public class PlayerSpawner : MonoBehaviour
 
     void DeleteRemotePlayer(IUserPresence presence)
     {
-        Debug.Log("MAYCJHA");
-        GameObject.Destroy(remotePlayers[presence.UserId]);
-        remotePlayers.Remove(presence.UserId);
+        remotePlayersToDestroy.Add(presence.UserId);
     }
 
     void SpawnLocalPlayer()
@@ -58,7 +57,16 @@ public class PlayerSpawner : MonoBehaviour
                 remotePlayers.Add(remotePlayersToSpawn[i], obj);
             }
             remotePlayersToSpawn.Clear();
+        }
 
+        if (remotePlayersToDestroy.Count > 0)
+        {
+            for (int i = 0; i < remotePlayersToDestroy.Count; i++)
+            {
+                GameObject.Destroy(remotePlayers[remotePlayersToDestroy[i]]);
+                remotePlayers.Remove(remotePlayersToDestroy[i]);
+            }
+            remotePlayersToDestroy.Clear();
         }
     }
 

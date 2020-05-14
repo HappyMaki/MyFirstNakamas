@@ -64,6 +64,7 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
         {
             foreach (var presence in presenceEvent.Leaves)
             {
+                EventManager.onRemoteDisconnectedPlayer.Invoke(presence);
                 connectedOpponents.Remove(presence);
             }
 
@@ -74,17 +75,14 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
 
             connectedOpponents.AddRange(presenceEvent.Joins);
 
-            //Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
         };
 
         //Remote players who are already logged in
         connectedOpponents.AddRange(match.Presences);
-        for (int i = 0; i<connectedOpponents.Count; i++)
+        for (int i = 0; i < connectedOpponents.Count; i++)
         {
             EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
         }
-        //Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
-
     }
 
     void AddReceivedMatchStateListener()
