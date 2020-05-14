@@ -52,7 +52,7 @@ function M.match_loop(context, dispatcher, tick, state, messages)
     for k, v in pairs(decoded) do
       -- print(("Message key %s contains value %s"):format(k, v))
       if state.presences[message.sender.user_id] ~= nil then
-        state.presences[message.sender.user_id].data = decoded.payload
+        state.presences[message.sender.user_id].data = nk.json_decode(decoded.payload)
       end
     end
     -- dispatcher.broadcast_message(1, message.data, {message.sender})

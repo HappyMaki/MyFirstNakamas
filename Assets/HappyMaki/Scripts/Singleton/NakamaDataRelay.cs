@@ -89,7 +89,9 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
     {
         socket.ReceivedMatchState += (state) =>
         {
-            gameState = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
+            string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
+            Debug.Log(data_json_string);
+            gameState = data_json_string;
         };
     }
 
