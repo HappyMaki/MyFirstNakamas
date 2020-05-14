@@ -23,6 +23,11 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     string activeSceneMatchId;
     string server_url;
 
+    public ISession Session
+    {
+        get { return session; }
+    }
+
     public IMatch Match
     {
         get { return match; }

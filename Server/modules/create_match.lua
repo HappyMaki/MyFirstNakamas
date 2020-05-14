@@ -24,7 +24,7 @@ local function join_match(context, payload)
   local setupstate = { initialstate = decoded }
   local matchid = nk.match_create(modulename, setupstate)
   
-  print("creating match yes")
+  print("creating match")
   print(matchid)
   return matchid
 end

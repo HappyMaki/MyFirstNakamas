@@ -1,4 +1,5 @@
 ﻿using Nakama;
+using Nakama.TinyJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,14 +13,49 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
     NakamaApi nakama;
     IMatch match;
     ISocket socket;
+    ISession session;
+    string userId;
+
+    String gameState;
+
+
     private void Start()
     {
         nakama = FindObjectOfType<NakamaApi>();
         socket = nakama.MatchSocket;
         match = nakama.Match;
+        session = nakama.Session;
+        userId = session.UserId;
+
+        EventManager.onLocalConnectedPlayer.Invoke();
+
+        Debug.Log("My Client ID is " + userId);
 
         AddReceivedMatchPresenceListener();
         AddReceivedMatchStateListener();
+    }
+
+    public string GameState
+    {
+        get { return gameState; }
+    }
+
+    public string ClientId
+    {
+        get { return userId; }
+    }
+
+    public ISession Session
+    {
+        get { return session; }
+    }
+
+    public void SendData(GameObject obj)
+    {
+        long opCode = 1;
+        string payload = JsonUtility.ToJson(new PlayerPayload(obj.transform));
+        string newState = new Dictionary<string, string> { { "payload", payload } }.ToJson();
+        socket.SendMatchStateAsync(match.Id, opCode, newState);
     }
 
     void AddReceivedMatchPresenceListener()
@@ -30,20 +66,33 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
             {
                 connectedOpponents.Remove(presence);
             }
+
+            foreach (var presence in presenceEvent.Joins)
+            {
+                EventManager.onRemoteConnectedPlayer.Invoke(presence);
+            }
+
             connectedOpponents.AddRange(presenceEvent.Joins);
-            // Remove yourself from connected opponents.
-            //connectedOpponents.Remove(self);
-            Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
+
+            //Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
         };
 
+        //Remote players who are already logged in
         connectedOpponents.AddRange(match.Presences);
-        Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
+        for (int i = 0; i<connectedOpponents.Count; i++)
+        {
+            EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
+        }
+        //Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
 
     }
 
     void AddReceivedMatchStateListener()
     {
-        socket.ReceivedMatchState += (state) => Debug.Log(System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length));
+        socket.ReceivedMatchState += (state) =>
+        {
+            gameState = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
+        };
     }
 
 
