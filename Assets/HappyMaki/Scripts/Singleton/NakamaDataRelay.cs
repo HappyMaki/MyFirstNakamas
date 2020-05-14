@@ -57,10 +57,10 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
                 connectedOpponents.Remove(presence);
             }
 
-            foreach (var presence in presenceEvent.Joins)
-            {
-                EventManager.onRemoteConnectedPlayer.Invoke(presence);
-            }
+            //foreach (var presence in presenceEvent.Joins)
+            //{
+            //    EventManager.onRemoteConnectedPlayer.Invoke(presence);
+            //}
 
             connectedOpponents.AddRange(presenceEvent.Joins);
 
@@ -68,10 +68,10 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
 
         //Remote players who are already logged in
         connectedOpponents.AddRange(match.Presences);
-        for (int i = 0; i < connectedOpponents.Count; i++)
-        {
-            EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
-        }
+        //for (int i = 0; i < connectedOpponents.Count; i++)
+        //{
+        //    EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
+        //}
     }
 
 

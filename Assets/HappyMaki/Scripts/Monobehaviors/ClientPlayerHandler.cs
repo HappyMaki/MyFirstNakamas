@@ -7,7 +7,8 @@ public class ClientPlayerHandler : MonoBehaviour
 {
     public GameObject localMalePlayerPrefab;
     public GameObject localFemalePlayerPrefab;
-    public GameObject remotePlayerPrefab;
+    public GameObject remoteMalePlayerPrefab;
+    public GameObject remoteFemalePlayerPrefab;
     public static PlayerGender localPlayerGender;
 
     GameObject localPlayer;
@@ -57,26 +58,31 @@ public class ClientPlayerHandler : MonoBehaviour
         remotePlayersToSpawn.Add(presence.UserId);
     }
 
-    GameObject InstantiateRemotePlayer(string id)
+    GameObject InstantiateRemotePlayer(PlayerDataResponse response)
     {
-        GameObject rPlayer = Instantiate(remotePlayerPrefab, transform.position, transform.rotation);
-        rPlayer.tag = "init_not_synced";
-        rPlayer.name = id;
-        return rPlayer;
+        PlayerGender gender = (PlayerGender)System.Enum.Parse(typeof(PlayerGender), response.gender);
+        GameObject rPlayer;
+        switch (gender)
+        {
+            case PlayerGender.MALE:
+                rPlayer = Instantiate(remoteMalePlayerPrefab, response.position, response.rotation);
+                rPlayer.tag = "init_not_synced";
+                rPlayer.name = response.userId;
+                return rPlayer;
+
+            case PlayerGender.FEMALE:
+                rPlayer = Instantiate(remoteFemalePlayerPrefab, response.position, response.rotation);
+                rPlayer.tag = "init_not_synced";
+                rPlayer.name = response.userId;
+                return rPlayer;
+
+            default:
+                return null;
+        }
     }
 
     private void Update()
     {
-        if (remotePlayersToSpawn.Count > 0)
-        {
-            for (int i = 0; i < remotePlayersToSpawn.Count; i++)
-            {
-                GameObject obj = InstantiateRemotePlayer(remotePlayersToSpawn[i]);
-                remotePlayers.Add(remotePlayersToSpawn[i], obj);
-            }
-            remotePlayersToSpawn.Clear();
-        }
-
         if (remotePlayersToDestroy.Count > 0)
         {
             for (int i = 0; i < remotePlayersToDestroy.Count; i++)
@@ -132,6 +138,11 @@ public class ClientPlayerHandler : MonoBehaviour
                     remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
                     remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
                     remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
+                }
+                else //We haven't spawned this player yet
+                {
+                    GameObject obj = InstantiateRemotePlayer(entry.Value);
+                    remotePlayers.Add(entry.Key, obj);
                 }
             }
         }
