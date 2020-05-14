@@ -2,6 +2,8 @@ local nk = require("nakama")
 
 local M = {}
 
+local OP_POSITION_LOOP = 1
+local OP_LOGIN_POSITION = 2
 
 function M.match_init(context, setupstate)
   print("match_init")
@@ -25,8 +27,19 @@ function M.match_join(context, dispatcher, tick, state, presences)
   print("someone match_join!")
   for _, presence in ipairs(presences) do
     state.presences[presence.user_id] = presence
-    
+
+    -- local user_id = "e2543db4-ea05-4a3b-be77-e13db8df9881" -- some user ID.
+    -- local object_ids = {
+    --   {collection = "character", key = "location", user_id = user_id}
+    -- }
+    -- local objects = nk.storage_read(object_ids)
+    -- for _, r in ipairs(objects)
+    -- do
+    --   local message = ("read: %q, write: %q, value: %q"):format(r.permission_read, r.permission_write, r.value)
+    --   dispatcher.broadcast_message(OP_LOGIN_POSITION, nk.json_encode(r.value), {presence.user_id})
+    -- end
   end
+  print("return")
   return state
 end
 
@@ -52,7 +65,7 @@ function M.match_loop(context, dispatcher, tick, state, messages)
       end
     end
   end
-  dispatcher.broadcast_message(1, nk.json_encode(state.presences))
+  dispatcher.broadcast_message(OP_POSITION_LOOP, nk.json_encode(state.presences))
   
   return state
 end

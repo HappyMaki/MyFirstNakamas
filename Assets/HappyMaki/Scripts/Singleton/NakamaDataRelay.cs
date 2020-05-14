@@ -78,19 +78,28 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
     {
         socket.ReceivedMatchState += (state) =>
         {
-            string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
-            gameState = data_json_string;
-
-            Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(gameState);
-            foreach (KeyValuePair<string, object> entry in player_data)
+            switch (state.OpCode)
             {
-                Dictionary<string, object> client = (Dictionary<string, object>)entry.Value;
-                object data = (Dictionary<string, object>)client["data"];
-                PlayerDataResponse pData = JsonUtility.FromJson<PlayerDataResponse>(Json.Serialize(data)); //TODO: I'm doing an extra serial/deserialize to just get it working. Fix later.
-                pData.name = (string)client["username"];
-                pData.userId = (string)client["user_id"];
-                playerData[pData.userId] = pData;
+                case 1:
+                    string data_json_string = System.Text.Encoding.UTF8.GetString(state.State, 0, state.State.Length);
+                    gameState = data_json_string;
+
+                    Dictionary<string, object> player_data = (Dictionary<string, object>)Json.Deserialize(gameState);
+                    foreach (KeyValuePair<string, object> entry in player_data)
+                    {
+                        Dictionary<string, object> client = (Dictionary<string, object>)entry.Value;
+                        object data = (Dictionary<string, object>)client["data"];
+                        PlayerDataResponse pData = JsonUtility.FromJson<PlayerDataResponse>(Json.Serialize(data)); //TODO: I'm doing an extra serial/deserialize to just get it working. Fix later.
+                        pData.name = (string)client["username"];
+                        pData.userId = (string)client["user_id"];
+                        playerData[pData.userId] = pData;
+                    }
+                    break;
+
+                default:
+                    break;
             }
+            
         };
     }
 

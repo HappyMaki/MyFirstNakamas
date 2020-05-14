@@ -86,9 +86,9 @@ public class ClientPlayerHandler : MonoBehaviour
                 }
                 if (remotePlayers.ContainsKey(entry.Key))
                 {
-                    remotePlayers[entry.Key].transform.position = entry.Value.position;
+                    remotePlayers[entry.Key].transform.position = Vector3.MoveTowards(remotePlayers[entry.Key].transform.position, entry.Value.position, 0.15f);
                     remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
-                    remotePlayers[entry.Key].transform.localScale = entry.Value.scale;
+                    remotePlayers[entry.Key].transform.localScale = Vector3.MoveTowards(remotePlayers[entry.Key].transform.localScale, entry.Value.scale, 0.15f);
                 }
             }
         }
