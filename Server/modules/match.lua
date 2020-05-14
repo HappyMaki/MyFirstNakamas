@@ -39,7 +39,7 @@ function M.match_join(context, dispatcher, tick, state, presences)
         state.presences[presence.user_id].data = r.value
       end
     else
-      state.presences[presence.user_id].data = {position= {x= 6.215908527374268, y= 0.005000054836273193, z= 5.161622047424316}, rotation= {w= 0.9507779479026794, x= 0, y= -0.3098730444908142, z= 0}, scale= {x= 1, y= 1, z= 1}}
+      state.presences[presence.user_id].data = {position= {x= 6.0, y= 0.01, z= 5.0}, rotation= {w= 0.95, x= 0, y= -0.31, z= 0}, scale= {x= 1, y= 1, z= 1}}
     end
 
     

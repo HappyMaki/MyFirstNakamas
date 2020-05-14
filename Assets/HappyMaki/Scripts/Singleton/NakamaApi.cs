@@ -103,6 +103,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
 
     IEnumerator PingServer()
     {
+        yield return new WaitForSeconds(0.5f);
         server_url = "http://" + serverIpAddress + ":" + serverPort.ToString();
         UnityWebRequest resp = UnityWebRequest.Get(server_url);
         yield return resp.SendWebRequest();

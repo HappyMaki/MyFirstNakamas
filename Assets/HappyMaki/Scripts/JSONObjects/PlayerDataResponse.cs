@@ -10,14 +10,12 @@ public class PlayerDataResponse
     public Vector3 position;
     public Quaternion rotation;
     public Vector3 scale;
+    public float InputHorizontal;
+    public float InputVertical;
+    public float InputMagnitude;
+    public float GroundDistance;
+    public bool IsGrounded;
+    public bool IsStrafing;
+    public bool IsSprinting;
 
-    public PlayerDataResponse(string id, string n, Transform t)
-    {
-        userId = id;
-        name = n;
-
-        position = t.position;
-        rotation = t.rotation;
-        scale = t.localScale;
-    }
 }

@@ -44,6 +44,7 @@ public class ClientPlayerHandler : MonoBehaviour
     GameObject InstantiateRemotePlayer(string id)
     {
         GameObject rPlayer = Instantiate(remotePlayerPrefab, transform.position, transform.rotation);
+        rPlayer.tag = "init_not_synced";
         rPlayer.name = id;
         return rPlayer;
     }
@@ -69,12 +70,6 @@ public class ClientPlayerHandler : MonoBehaviour
             }
             remotePlayersToDestroy.Clear();
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (localPlayer && initialized)
-            nakamaDataRelay.SendData(localPlayer);
 
         if (nakamaDataRelay.PlayerData != null)
         {
@@ -97,12 +92,42 @@ public class ClientPlayerHandler : MonoBehaviour
                 }
                 if (remotePlayers.ContainsKey(entry.Key))
                 {
+                    if (remotePlayers[entry.Key].tag == "init_not_synced")
+                    {
+                        remotePlayers[entry.Key].transform.position = entry.Value.position;
+                        remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
+                        remotePlayers[entry.Key].transform.localScale = entry.Value.scale;
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputHorizontal", entry.Value.InputHorizontal);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputVertical", entry.Value.InputVertical);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputMagnitude", entry.Value.InputMagnitude);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("GroundDistance", entry.Value.GroundDistance);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
+                        remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
+                        remotePlayers[entry.Key].tag = "init_synced";
+                    }
+
                     remotePlayers[entry.Key].transform.position = Vector3.MoveTowards(remotePlayers[entry.Key].transform.position, entry.Value.position, 0.15f);
                     remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
                     remotePlayers[entry.Key].transform.localScale = Vector3.MoveTowards(remotePlayers[entry.Key].transform.localScale, entry.Value.scale, 0.15f);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputHorizontal", entry.Value.InputHorizontal);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputVertical", entry.Value.InputVertical);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputMagnitude", entry.Value.InputMagnitude);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("GroundDistance", entry.Value.GroundDistance);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
+                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (localPlayer && initialized)
+            nakamaDataRelay.SendData(localPlayer);
+
+        
     }
 
 }
