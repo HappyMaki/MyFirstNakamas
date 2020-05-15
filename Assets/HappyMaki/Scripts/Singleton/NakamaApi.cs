@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nakama;
 using UnityEngine.Networking;
-
+using MiniJSON;
 
 public class NakamaApi : SingletonBehaviour<NakamaApi>
 {
@@ -74,7 +74,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         await matchSocket.LeaveMatchAsync(activeSceneMatchId);
     }
 
-    public IEnumerator RPC_GetMatchID(string label)
+    public IEnumerator ClientJoinMatchByMatchId(string label)
     {
         string endpoint = server_url + "/v2/rpc/join_match_rpc?http_key=" + http_key;
 
@@ -184,18 +184,27 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     }
     #endregion
 
-    void GetPlayerCharacterInfo()
+    public async void GetLoginInfo()
     {
         StorageObjectId[] objs = new StorageObjectId[]
         {
             new StorageObjectId
             {
                 Collection = "character",
-                Key = "base",
+                Key = "location",
                 UserId = session.UserId
             }
         };
-        GetData(objs);
+        IApiStorageObjects result = await client.ReadStorageObjectsAsync(session, objs);
+        foreach (IApiStorageObject entry in result.Objects)
+        {
+            //Debug.Log(entry.Value);
+            PlayerDataResponse pData = JsonUtility.FromJson<PlayerDataResponse>(entry.Value);
+            EventManager.onGetLoginInformation.Invoke(pData);
+
+        }
+
+
     }
 
 

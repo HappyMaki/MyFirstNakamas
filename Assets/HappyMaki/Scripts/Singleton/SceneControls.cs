@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Nakama;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneControls : MonoBehaviour
 {
+    public string firstSceneOnNewAccount = "Kerfuffle";
     public string nextScene;
     NakamaApi nakama;
 
@@ -13,9 +15,10 @@ public class SceneControls : MonoBehaviour
         nakama = FindObjectOfType<NakamaApi>();
 
         EventManager.onServerDiscovery.AddListener(SwitchScenes); //This only runs locally before we connect
-        EventManager.onLoginAttempt.AddListener(HandleNetworkLogin); //This only runs locally before we connect
+        EventManager.onLoginAttempt.AddListener(GetLoginInformation); //This only runs locally before we connect
         EventManager.onGetMatchId.AddListener(JoinNetworkScene);
         EventManager.onRoomJoin.AddListener(SwitchNetworkScenes);
+        EventManager.onGetLoginInformation.AddListener(FinallyLogin);
     }
 
     private void OnDestroy()
@@ -24,6 +27,7 @@ public class SceneControls : MonoBehaviour
         EventManager.onLoginAttempt.RemoveAllListeners(); 
         EventManager.onGetMatchId.RemoveAllListeners();
         EventManager.onRoomJoin.RemoveAllListeners();
+        EventManager.onGetLoginInformation.RemoveAllListeners();
     }
 
     void SwitchScenes()
@@ -31,13 +35,26 @@ public class SceneControls : MonoBehaviour
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
 
-    void HandleNetworkLogin(AccountLoginResolution resolution)
+    void GetLoginInformation(AccountLoginResolution resolution)
     {
         if (resolution == AccountLoginResolution.SUCCESS)
         {
-            //JoinNetworkScene(nextScene, LoadSceneMode.Single);
-            StartCoroutine(nakama.RPC_GetMatchID(nextScene));
+            nakama.GetLoginInfo();
         }
+    }
+
+    void FinallyLogin(PlayerDataResponse response)
+    {
+        if (response.scene == null)
+        {
+            nextScene = firstSceneOnNewAccount;
+        }
+        else
+        {
+            nextScene = response.scene;
+        }
+        Debug.Log(nextScene);
+        StartCoroutine(nakama.ClientJoinMatchByMatchId(nextScene));
     }
 
     void SwitchNetworkScenes(string scene)

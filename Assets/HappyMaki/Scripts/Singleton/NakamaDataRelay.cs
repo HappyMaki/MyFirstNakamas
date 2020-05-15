@@ -91,7 +91,6 @@ public class NakamaDataRelay : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("Destroyed");
         socket.ReceivedMatchPresence -= matchPresenceHandler;
         socket.ReceivedMatchState -= matchStateHandler;
 
@@ -114,7 +113,7 @@ public class NakamaDataRelay : MonoBehaviour
 
         //Remote players who are already logged in
         connectedOpponents.AddRange(match.Presences);
-        Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
+        //Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
         for (int i = 0; i < connectedOpponents.Count; i++)
         {
             Debug.Log("Event Emitted");

@@ -18,4 +18,5 @@ public class PlayerDataResponse
     public bool IsStrafing;
     public bool IsSprinting;
     public string gender;
+    public string scene;
 }

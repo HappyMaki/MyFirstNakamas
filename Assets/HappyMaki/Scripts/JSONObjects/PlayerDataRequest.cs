@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerDataRequest 
@@ -16,6 +17,7 @@ public class PlayerDataRequest
     public bool IsStrafing;
     public bool IsSprinting;
     public PlayerGender gender;
+    public string scene;
 
     public PlayerDataRequest(GameObject obj)
     {
@@ -34,5 +36,6 @@ public class PlayerDataRequest
         scale = t.localScale;
 
         gender = ClientPlayerHandler.localPlayerGender;
+        scene = SceneManager.GetActiveScene().name;
     }
 }

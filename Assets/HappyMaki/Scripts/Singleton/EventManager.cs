@@ -13,6 +13,7 @@ public class EventManager
     public static OnRemoteConnectedPlayer       onRemoteConnectedPlayer         = new OnRemoteConnectedPlayer();
     public static OnRemoteDisconnectedPlayer    onRemoteDisconnectedPlayer      = new OnRemoteDisconnectedPlayer();
     public static OnLocalConnectedPlayer        onLocalConnectedPlayer          = new OnLocalConnectedPlayer();
+    public static OnGetLoginInformation         onGetLoginInformation           = new OnGetLoginInformation();
 
     private EventManager() { }
 
