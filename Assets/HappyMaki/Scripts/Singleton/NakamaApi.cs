@@ -69,6 +69,11 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         //}
     }
 
+    public async void LeaveMatch()
+    {
+        await matchSocket.LeaveMatchAsync(activeSceneMatchId);
+    }
+
     public IEnumerator RPC_GetMatchID(string label)
     {
         string endpoint = server_url + "/v2/rpc/join_match_rpc?http_key=" + http_key;

@@ -83,16 +83,6 @@ public class ClientPlayerHandler : MonoBehaviour
 
     private void Update()
     {
-        if (remotePlayersToDestroy.Count > 0)
-        {
-            for (int i = 0; i < remotePlayersToDestroy.Count; i++)
-            {
-                GameObject.Destroy(remotePlayers[remotePlayersToDestroy[i]]);
-                remotePlayers.Remove(remotePlayersToDestroy[i]);
-            }
-            remotePlayersToDestroy.Clear();
-        }
-
         if (nakamaDataRelay.PlayerData != null)
         {
             Dictionary<string, PlayerDataResponse> playerDataCopy = new Dictionary<string, PlayerDataResponse>(nakamaDataRelay.PlayerData);
@@ -141,10 +131,25 @@ public class ClientPlayerHandler : MonoBehaviour
                 }
                 else //We haven't spawned this player yet
                 {
-                    GameObject obj = InstantiateRemotePlayer(entry.Value);
-                    remotePlayers.Add(entry.Key, obj);
+                    if (remotePlayersToSpawn.Contains(entry.Value.userId))
+                    {
+                        GameObject obj = InstantiateRemotePlayer(entry.Value);
+                        remotePlayersToSpawn.Remove(entry.Value.userId);
+                        remotePlayers.Add(entry.Key, obj);
+                    }
                 }
             }
+        }
+
+        if (remotePlayersToDestroy.Count > 0)
+        {
+            for (int i = 0; i < remotePlayersToDestroy.Count; i++)
+            {
+                Debug.Log("DELETING PLAYER: " + remotePlayersToDestroy[i]);
+                GameObject.Destroy(remotePlayers[remotePlayersToDestroy[i]]);
+                remotePlayers.Remove(remotePlayersToDestroy[i]);
+            }
+            remotePlayersToDestroy.Clear();
         }
     }
 
@@ -152,8 +157,6 @@ public class ClientPlayerHandler : MonoBehaviour
     {
         if (localPlayer && initialized)
             nakamaDataRelay.SendData(localPlayer);
-
-        
     }
 
 }

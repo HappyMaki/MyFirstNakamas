@@ -7143,7 +7143,7 @@ GameObject:
   - component: {fileID: 7147809733285477953}
   m_Layer: 0
   m_Name: RemoteFemalePlayerPrefab
-  m_TagString: Player
+  m_TagString: remote_player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

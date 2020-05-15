@@ -2355,8 +2355,8 @@ GameObject:
   - component: {fileID: 7995794232411568754}
   - component: {fileID: 7995794232411568755}
   m_Layer: 0
-  m_Name: vBasicController_M07
-  m_TagString: Player
+  m_Name: LocalMalePlayerPrefab
+  m_TagString: local_player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
