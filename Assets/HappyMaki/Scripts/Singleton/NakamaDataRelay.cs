@@ -108,7 +108,6 @@ public class NakamaDataRelay : MonoBehaviour
 
     void InvokeReceivedMatchPresenceEvent()
     {
-
         socket.ReceivedMatchPresence += matchPresenceHandler;
 
         //Remote players who are already logged in

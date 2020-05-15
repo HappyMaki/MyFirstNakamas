@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9998d4608b9c14c4fb0868a400b1b75a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 
 --- !u!4 &14308648
 Transform:
   m_ObjectHideFlags: 0
@@ -234,7 +233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh682384
+  m_Name: pb_Mesh678582
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -422,6 +421,8 @@ Transform:
   m_Children:
   - {fileID: 1148010210}
   - {fileID: 2105809674}
+  - {fileID: 587102070}
+  - {fileID: 895250374}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -451,14 +452,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: Lentils
-  nextTransform: {fileID: 0}
+  nextTransform: {fileID: 895250374}
 --- !u!43 &243484357
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3328086
+  m_Name: pb_Mesh681302
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3447,7 +3448,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh682454
+  m_Name: pb_Mesh678670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3604,6 +3605,36 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &587102069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 587102070}
+  m_Layer: 0
+  m_Name: SpawnInLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587102070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587102069}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.08, y: 0, z: -1.5600009}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 118352814}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &666569044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,7 +3733,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh682402
+  m_Name: pb_Mesh678596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3953,6 +3984,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 894258849}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &895250373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895250374}
+  m_Layer: 0
+  m_Name: LentilsSpawnOutLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &895250374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895250373}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 3.5621164, y: 0, z: -3.636377}
+  m_LocalScale: {x: 12.45695, y: 1, z: 0.08027759}
+  m_Children: []
+  m_Father: {fileID: 118352814}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1005011454
 GameObject:
   m_ObjectHideFlags: 0
@@ -4611,7 +4672,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh688398
+  m_Name: pb_Mesh678518
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10145,7 +10206,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh688520
+  m_Name: pb_Mesh678656
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10950,7 +11011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: Legume
-  nextTransform: {fileID: 0}
+  nextTransform: {fileID: 1536848246}
 --- !u!65 &1524975667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10977,8 +11038,40 @@ Transform:
   m_Children:
   - {fileID: 1710976414}
   - {fileID: 316939631}
+  - {fileID: 1861315003}
+  - {fileID: 1536848246}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1536848245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536848246}
+  m_Layer: 0
+  m_Name: LegumeSpawnOutLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536848246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536848245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2407286, y: 0, z: -18.17982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1524975668}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682381228
 GameObject:
@@ -16509,7 +16602,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh682362
+  m_Name: pb_Mesh678560
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16729,6 +16822,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1853131218}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1861315002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1861315003}
+  m_Layer: 0
+  m_Name: SpawnInLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1861315003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861315002}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5584474}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1524975668}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &2105809669
 GameObject:
   m_ObjectHideFlags: 0
@@ -18845,7 +18968,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh682414
+  m_Name: pb_Mesh678620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

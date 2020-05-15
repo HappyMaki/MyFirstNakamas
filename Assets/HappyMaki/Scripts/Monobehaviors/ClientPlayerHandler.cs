@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ClientPlayerHandler : MonoBehaviour
 {
+    public static bool justLoggedIn = true;
+
     public GameObject localMalePlayerPrefab;
     public GameObject localFemalePlayerPrefab;
     public GameObject remoteMalePlayerPrefab;
@@ -61,7 +63,6 @@ public class ClientPlayerHandler : MonoBehaviour
 
     void SpawnRemotePlayer(IUserPresence presence)
     {
-        Debug.Log("I WAS CALLED");
         remotePlayersToSpawn.Add(presence.UserId);
     }
 
@@ -100,10 +101,15 @@ public class ClientPlayerHandler : MonoBehaviour
                     if (!initialized)
                     {
                         localPlayerGender = (PlayerGender)System.Enum.Parse(typeof(PlayerGender), entry.Value.gender);
-                        SpawnLocalPlayer(entry.Value.position, entry.Value.rotation, localPlayerGender);
-                        localPlayer.transform.position = entry.Value.position;
-                        localPlayer.transform.rotation = entry.Value.rotation;
-                        localPlayer.transform.localScale = entry.Value.scale;
+                        if (justLoggedIn)
+                        {
+                            SpawnLocalPlayer(entry.Value.position, entry.Value.rotation, localPlayerGender);
+                            justLoggedIn = false;
+                        }
+                        else
+                        {
+                            SpawnLocalPlayer(WarpGateData.nextScenePosition, WarpGateData.nextSceneRotation, localPlayerGender);
+                        }
                         initialized = true;
                     }
                     continue;

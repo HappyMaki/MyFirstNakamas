@@ -8,21 +8,19 @@ public class WarpGate : MonoBehaviour
     public Transform nextTransform;
 
     NakamaApi nakama;
-    SceneControls sceneControls;
 
     private void Start()
     {
         nakama = FindObjectOfType<NakamaApi>();
-        sceneControls = FindObjectOfType<SceneControls>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "local_player")
         {
-            Debug.Log("SENDING YOU AWAY");
+            WarpGateData.SetTransform(nextTransform);
+            WarpGateData.nextSceneName = nextScene;
             nakama.LeaveMatch();
-            sceneControls.nextScene = nextScene;
             StartCoroutine(nakama.ClientJoinMatchByMatchId(nextScene));
         }
     }

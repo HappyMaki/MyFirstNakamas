@@ -52,7 +52,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
             await matchSocket.LeaveMatchAsync(match);
     }
 
-    public async void JoinMatchIdAsync(string matchId, string nextScene)
+    public async void JoinMatchIdAsync(string matchId)
     {
         if (matchSocket == null)
         {
@@ -61,7 +61,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         }
         activeSceneMatchId = matchId;
         match = await matchSocket.JoinMatchAsync(matchId);
-        EventManager.onRoomJoin.Invoke(nextScene);
+        EventManager.onRoomJoin.Invoke();
 
         //foreach (var presence in match.Presences)
         //{
@@ -94,7 +94,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         }
         else
         {
-            Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
+            //Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
             MatchJoinResponse response = JsonUtility.FromJson<MatchJoinResponse>(request.downloadHandler.text);
             EventManager.onGetMatchId.Invoke(response);
         }
