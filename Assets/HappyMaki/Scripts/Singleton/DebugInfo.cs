@@ -3,6 +3,11 @@
     static string header = "<Header>";
     static string message = "<Message>";
 
+    private DebugInfo()
+    {
+
+    }
+
     public static string Message {
         get { return message; }
         set { message = value; }
