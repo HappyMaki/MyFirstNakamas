@@ -22,6 +22,8 @@ public class WarpGate : MonoBehaviour
         {
             Debug.Log("SENDING YOU AWAY");
             nakama.LeaveMatch();
+            sceneControls.nextScene = nextScene;
+            StartCoroutine(nakama.RPC_GetMatchID(nextScene));
         }
     }
 }

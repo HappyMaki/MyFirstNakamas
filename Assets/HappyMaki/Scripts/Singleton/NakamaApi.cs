@@ -94,7 +94,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         }
         else
         {
-            //    Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
+            Debug.Log("Status Code" + request.responseCode + ": " + request.downloadHandler.text);
             MatchJoinResponse response = JsonUtility.FromJson<MatchJoinResponse>(request.downloadHandler.text);
             EventManager.onGetMatchId.Invoke(response);
         }

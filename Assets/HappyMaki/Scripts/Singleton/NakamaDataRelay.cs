@@ -7,7 +7,7 @@ using UnityEngine;
 using MiniJSON;
 
 //This class is intended to exist only once per scene. It manages the remote game objects and transmits/receives data from the nakama server
-public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
+public class NakamaDataRelay : MonoBehaviour
 {
     public bool debugPackets;
 
@@ -18,7 +18,8 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
     ISocket socket;
     ISession session;
     string userId;
-
+    Action<Nakama.IMatchPresenceEvent> matchPresenceHandler;
+    Action<Nakama.IMatchState> matchStateHandler;
 
     Dictionary<string, PlayerDataResponse> playerData = new Dictionary<string, PlayerDataResponse>();
 
@@ -33,23 +34,16 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
 
         EventManager.onLocalConnectedPlayer.Invoke();
 
+        SetupHandlers();
 
-        AddReceivedMatchPresenceListener();
-        AddReceivedMatchStateListener();
+        InvokeReceivedMatchPresenceEvent();
+        InvokeReceivedMatchStateEvent();
 
     }
 
-    public void SendData(GameObject obj)
+    private void SetupHandlers()
     {
-        long opCode = 1;
-        string payload = JsonUtility.ToJson(new PlayerDataRequest(obj));
-        string newState = new Dictionary<string, string> { { "payload", payload } }.ToJson();
-        socket.SendMatchStateAsync(match.Id, opCode, newState);
-    }
-
-    void AddReceivedMatchPresenceListener()
-    {
-        socket.ReceivedMatchPresence += presenceEvent =>
+        matchPresenceHandler = (presenceEvent) =>
         {
             foreach (var presence in presenceEvent.Leaves)
             {
@@ -63,21 +57,10 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
             }
 
             connectedOpponents.AddRange(presenceEvent.Joins);
-
+            Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
         };
 
-        //Remote players who are already logged in
-        connectedOpponents.AddRange(match.Presences);
-        for (int i = 0; i < connectedOpponents.Count; i++)
-        {
-            EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
-        }
-    }
-
-
-    void AddReceivedMatchStateListener()
-    {
-        socket.ReceivedMatchState += (state) =>
+        matchStateHandler = (state) =>
         {
             switch (state.OpCode)
             {
@@ -102,8 +85,47 @@ public class NakamaDataRelay : SingletonBehaviour<NakamaDataRelay>
                 default:
                     break;
             }
-            
+
         };
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Destroyed");
+        socket.ReceivedMatchPresence -= matchPresenceHandler;
+        socket.ReceivedMatchState -= matchStateHandler;
+
+        connectedOpponents.Clear();
+        playerData.Clear();
+    }
+
+    public void SendData(GameObject obj)
+    {
+        long opCode = 1;
+        string payload = JsonUtility.ToJson(new PlayerDataRequest(obj));
+        string newState = new Dictionary<string, string> { { "payload", payload } }.ToJson();
+        socket.SendMatchStateAsync(match.Id, opCode, newState);
+    }
+
+    void InvokeReceivedMatchPresenceEvent()
+    {
+
+        socket.ReceivedMatchPresence += matchPresenceHandler;
+
+        //Remote players who are already logged in
+        connectedOpponents.AddRange(match.Presences);
+        Debug.LogFormat("Connected opponents: [{0}]", string.Join(",\n  ", connectedOpponents));
+        for (int i = 0; i < connectedOpponents.Count; i++)
+        {
+            Debug.Log("Event Emitted");
+            EventManager.onRemoteConnectedPlayer.Invoke(connectedOpponents[i]);
+        }
+    }
+
+
+    void InvokeReceivedMatchStateEvent()
+    {
+        socket.ReceivedMatchState += matchStateHandler;
     }
 
     public Dictionary<string, PlayerDataResponse> PlayerData

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneControls : SingletonBehaviour<SceneControls>
+public class SceneControls : MonoBehaviour
 {
     public string nextScene;
     NakamaApi nakama;
@@ -14,9 +14,16 @@ public class SceneControls : SingletonBehaviour<SceneControls>
 
         EventManager.onServerDiscovery.AddListener(SwitchScenes); //This only runs locally before we connect
         EventManager.onLoginAttempt.AddListener(HandleNetworkLogin); //This only runs locally before we connect
-
         EventManager.onGetMatchId.AddListener(JoinNetworkScene);
         EventManager.onRoomJoin.AddListener(SwitchNetworkScenes);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onServerDiscovery.RemoveAllListeners(); 
+        EventManager.onLoginAttempt.RemoveAllListeners(); 
+        EventManager.onGetMatchId.RemoveAllListeners();
+        EventManager.onRoomJoin.RemoveAllListeners();
     }
 
     void SwitchScenes()

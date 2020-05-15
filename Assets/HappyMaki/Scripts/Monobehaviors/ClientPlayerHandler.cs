@@ -19,13 +19,19 @@ public class ClientPlayerHandler : MonoBehaviour
     Dictionary<string, GameObject> remotePlayers = new Dictionary<string, GameObject>();
     bool initialized = false;
 
-    private void Start()
+    private void Awake()
     {
         nakamaDataRelay = FindObjectOfType<NakamaDataRelay>();
 
         //EventManager.onLocalConnectedPlayer.AddListener(SpawnLocalPlayer);
         EventManager.onRemoteConnectedPlayer.AddListener(SpawnRemotePlayer);
         EventManager.onRemoteDisconnectedPlayer.AddListener(DeleteRemotePlayer);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onRemoteConnectedPlayer.RemoveAllListeners();
+        EventManager.onRemoteDisconnectedPlayer.RemoveAllListeners();
     }
 
     void DeleteRemotePlayer(IUserPresence presence)
@@ -55,6 +61,7 @@ public class ClientPlayerHandler : MonoBehaviour
 
     void SpawnRemotePlayer(IUserPresence presence)
     {
+        Debug.Log("I WAS CALLED");
         remotePlayersToSpawn.Add(presence.UserId);
     }
 
@@ -101,13 +108,28 @@ public class ClientPlayerHandler : MonoBehaviour
                     }
                     continue;
                 }
-                if (remotePlayers.ContainsKey(entry.Key))
+                else
                 {
-                    if (remotePlayers[entry.Key].tag == "init_not_synced")
+                    if (remotePlayers.ContainsKey(entry.Key))
                     {
-                        remotePlayers[entry.Key].transform.position = entry.Value.position;
+                        if (remotePlayers[entry.Key].tag == "init_not_synced")
+                        {
+                            remotePlayers[entry.Key].transform.position = entry.Value.position;
+                            remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
+                            remotePlayers[entry.Key].transform.localScale = entry.Value.scale;
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputHorizontal", entry.Value.InputHorizontal);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputVertical", entry.Value.InputVertical);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputMagnitude", entry.Value.InputMagnitude);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("GroundDistance", entry.Value.GroundDistance);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
+                            remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
+                            remotePlayers[entry.Key].tag = "init_synced";
+                        }
+
+                        remotePlayers[entry.Key].transform.position = Vector3.MoveTowards(remotePlayers[entry.Key].transform.position, entry.Value.position, 0.15f);
                         remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
-                        remotePlayers[entry.Key].transform.localScale = entry.Value.scale;
+                        remotePlayers[entry.Key].transform.localScale = Vector3.MoveTowards(remotePlayers[entry.Key].transform.localScale, entry.Value.scale, 0.15f);
                         remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputHorizontal", entry.Value.InputHorizontal);
                         remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputVertical", entry.Value.InputVertical);
                         remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputMagnitude", entry.Value.InputMagnitude);
@@ -115,42 +137,56 @@ public class ClientPlayerHandler : MonoBehaviour
                         remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
                         remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
                         remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
-                        remotePlayers[entry.Key].tag = "init_synced";
                     }
-
-                    remotePlayers[entry.Key].transform.position = Vector3.MoveTowards(remotePlayers[entry.Key].transform.position, entry.Value.position, 0.15f);
-                    remotePlayers[entry.Key].transform.rotation = entry.Value.rotation;
-                    remotePlayers[entry.Key].transform.localScale = Vector3.MoveTowards(remotePlayers[entry.Key].transform.localScale, entry.Value.scale, 0.15f);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputHorizontal", entry.Value.InputHorizontal);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputVertical", entry.Value.InputVertical);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("InputMagnitude", entry.Value.InputMagnitude);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetFloat("GroundDistance", entry.Value.GroundDistance);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsGrounded", entry.Value.IsGrounded);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsStrafing", entry.Value.IsStrafing);
-                    remotePlayers[entry.Key].GetComponent<Animator>().SetBool("IsSprinting", entry.Value.IsSprinting);
-                }
-                else //We haven't spawned this player yet
-                {
-                    if (remotePlayersToSpawn.Contains(entry.Value.userId))
+                    else //This is a new player
                     {
-                        GameObject obj = InstantiateRemotePlayer(entry.Value);
-                        remotePlayersToSpawn.Remove(entry.Value.userId);
-                        remotePlayers.Add(entry.Key, obj);
+                        List<string> tempSpawnDict = new List<string>(remotePlayersToSpawn);
+                        foreach (string e in tempSpawnDict)
+                        {
+                            if (e == entry.Key)
+                            {
+                                Debug.Log("spawn em");
+                                GameObject obj = InstantiateRemotePlayer(entry.Value);
+                                remotePlayers.Add(e, obj);
+                                remotePlayersToSpawn.Remove(entry.Value.userId);
+                            }
+                        }
                     }
                 }
+
             }
+
+            
+
+            List<string> tempDict = new List<string>(remotePlayersToDestroy);
+            foreach (string entry in tempDict)
+            {
+                Debug.Log("DELETING PLAYER: " + entry);
+                GameObject.Destroy(remotePlayers[entry]);
+                remotePlayers.Remove(entry);
+                remotePlayersToDestroy.Remove(entry);
+            }
+            
+
         }
 
-        if (remotePlayersToDestroy.Count > 0)
-        {
-            for (int i = 0; i < remotePlayersToDestroy.Count; i++)
-            {
-                Debug.Log("DELETING PLAYER: " + remotePlayersToDestroy[i]);
-                GameObject.Destroy(remotePlayers[remotePlayersToDestroy[i]]);
-                remotePlayers.Remove(remotePlayersToDestroy[i]);
-            }
-            remotePlayersToDestroy.Clear();
-        }
+
+
+
+        //if (remotePlayersToDestroy.Count > 0)
+        //{
+        //    Debug.Log(remotePlayersToDestroy.Count);
+        //    for (int i = 0; i < remotePlayersToDestroy.Count; i++)
+        //    {
+        //        if (remotePlayers.ContainsKey(remotePlayersToDestroy[i]))
+        //        {
+        //            Debug.Log("DELETING PLAYER: " + remotePlayersToDestroy[i]);
+        //            GameObject.Destroy(remotePlayers[remotePlayersToDestroy[i]]);
+        //            remotePlayers.Remove(remotePlayersToDestroy[i]);
+        //        }
+        //    }
+        //    remotePlayersToDestroy.Clear();
+        //}
     }
 
     private void FixedUpdate()
