@@ -39,7 +39,7 @@ socket:
 
 session:
   encryption_key: "_|1[Tg0♥x&~jAU{B♦:>"
-  token_expiry_sec: 60
+  token_expiry_sec: 259200
 
 social:
   steam:

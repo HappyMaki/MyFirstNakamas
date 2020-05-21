@@ -11,6 +11,13 @@ Assets/Credits/
 /.vscode/
 /.vs/
 /bin/
+*.log
+*.sst
+Server/data/cockroach/certs/
+Server/data/cockroach/*-addr
+Server/data/	
+Server/data/cockroach/
+Server/data/cockroach/logs/
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
