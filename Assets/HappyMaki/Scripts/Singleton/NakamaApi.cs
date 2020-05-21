@@ -14,6 +14,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     const string server_key = "ZdsG11p&y13zl6a";
     const string http_key = "XiHe41dci9";
 
+
     ISocket matchSocket = null;
 
     string deviceId;
@@ -37,20 +38,28 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     {
         get { return matchSocket; }
     }
-    
+    public Client Client
+    {
+        get { return client; }
+    }
     void Start()
     {
         deviceId = SystemInfo.deviceUniqueIdentifier;
         client = new Client("http", serverIpAddress, serverPort, server_key);
         ServerDiscovery();
-
     }
 
     private async void OnDestroy()
     {
+
         if (matchSocket != null)
             await matchSocket.LeaveMatchAsync(match);
     }
+
+  
+
+
+
 
     public async void JoinMatchIdAsync(string matchId)
     {
@@ -76,6 +85,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
 
     public IEnumerator ClientJoinMatchByMatchId(string label)
     {
+        //Debug.Log("Joining match");
         string endpoint = server_url + "/v2/rpc/join_match_rpc?http_key=" + http_key;
 
         var request = new UnityWebRequest(endpoint, "POST");
@@ -156,12 +166,13 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     {
         try
         {
-            //Debug.Log("Login: " + account + ", " + password);
+            Debug.Log("Login: " + account + ", " + password);
             session = await client.AuthenticateEmailAsync(account, password, username: name, create: false);
             authed = true;
 
             EventManager.onLoginAttempt.Invoke(AccountLoginResolution.SUCCESS);
             DebugInfo.SetToast("Login Success", "Entering the world!");
+
         }
         catch (ApiResponseException e)
         {
@@ -201,8 +212,10 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
             //Debug.Log(entry.Value);
             PlayerDataResponse pData = JsonUtility.FromJson<PlayerDataResponse>(entry.Value);
             EventManager.onGetLoginInformation.Invoke(pData);
-
+            return;
         }
+
+        EventManager.onGetLoginInformation.Invoke(new PlayerDataResponse());
 
 
     }

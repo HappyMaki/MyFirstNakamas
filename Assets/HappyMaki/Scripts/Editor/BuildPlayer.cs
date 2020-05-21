@@ -17,6 +17,7 @@ public class BuildPlayer
     static string[] scenes = new[] {
             @"Assets\HappyMaki\Scenes\0-BootupScene.unity",
             @"Assets\HappyMaki\Scenes\1-MainMenu.unity",
+            @"Assets\HappyMaki\Scenes\2-GlobalObjects.unity",
             @"Assets\HappyMaki\Scenes\Lentils.unity",
             @"Assets\HappyMaki\Scenes\Legume.unity",
             @"Assets\HappyMaki\Scenes\Kerfuffle.unity"

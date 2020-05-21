@@ -40,6 +40,7 @@ public class LoginSceneControls : MonoBehaviour
     {
         if (resolution == AccountLoginResolution.SUCCESS)
         {
+            SceneManager.LoadScene("2-GlobalObjects", LoadSceneMode.Additive);
             nakama.GetLoginInfo();
         }
     }
