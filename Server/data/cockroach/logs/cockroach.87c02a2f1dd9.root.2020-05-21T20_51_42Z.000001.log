@@ -1,0 +1,51 @@
+I200521 20:51:42.436741 1 util/log/clog.go:1196  [config] file created at: 2020/05/21 20:51:42
+I200521 20:51:42.436741 1 util/log/clog.go:1196  [config] running on machine: 87c02a2f1dd9
+I200521 20:51:42.436741 1 util/log/clog.go:1196  [config] binary: CockroachDB CCL v19.2.5 (x86_64-unknown-linux-gnu, built 2020/03/16 18:27:12, go1.12.12)
+I200521 20:51:42.436741 1 util/log/clog.go:1196  [config] arguments: [/cockroach/cockroach start --insecure --store=attrs=ssd,path=/var/lib/cockroach/]
+I200521 20:51:42.436741 1 util/log/clog.go:1196  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+I200521 20:51:42.436741 1 cli/start.go:1144  logging to directory /var/lib/cockroach/logs
+W200521 20:51:42.462303 1 cli/start.go:1182  RUNNING IN INSECURE MODE!
+
+- Your cluster is open for any client that can access <all your IP addresses>.
+- Any user, even root, can log in without providing a password.
+- Any user, connecting as root, can read or write any data in your cluster.
+- There is no network encryption nor authentication, and thus no confidentiality.
+
+Check out how to secure your cluster: https://www.cockroachlabs.com/docs/v19.2/secure-a-cluster.html
+I200521 20:51:42.462810 1 server/status/recorder.go:597  available memory from cgroups (8.0 EiB) is unsupported, using system memory 1.9 GiB instead: 
+W200521 20:51:42.462994 1 cli/start.go:1052  Using the default setting for --cache (128 MiB).
+  A significantly larger value is usually needed for good performance.
+  If you have a dedicated server a reasonable setting is --cache=.25 (497 MiB).
+I200521 20:51:42.463249 1 server/status/recorder.go:597  available memory from cgroups (8.0 EiB) is unsupported, using system memory 1.9 GiB instead: 
+W200521 20:51:42.463263 1 cli/start.go:1065  Using the default setting for --max-sql-memory (128 MiB).
+  A significantly larger value is usually needed in production.
+  If you have a dedicated server a reasonable setting is --max-sql-memory=.25 (497 MiB).
+I200521 20:51:42.463459 1 server/status/recorder.go:597  available memory from cgroups (8.0 EiB) is unsupported, using system memory 1.9 GiB instead: 
+I200521 20:51:42.463470 1 cli/start.go:1196  CockroachDB CCL v19.2.5 (x86_64-unknown-linux-gnu, built 2020/03/16 18:27:12, go1.12.12)
+W200521 20:51:43.740676 1 cli/start.go:511  running 'cockroach start' without --join is deprecated.
+Consider using 'cockroach start-single-node' or 'cockroach init' instead.
+I200521 20:51:43.766855 1 server/status/recorder.go:597  available memory from cgroups (8.0 EiB) is unsupported, using system memory 1.9 GiB instead: 
+I200521 20:51:43.766876 1 server/config.go:394  system total memory: 1.9 GiB
+I200521 20:51:43.766903 1 server/config.go:396  server configuration:
+max offset             500000000
+cache size             128 MiB
+SQL memory pool size   128 MiB
+scan interval          10m0s
+scan min idle time     10ms
+scan max idle time     1s
+event log enabled      true
+I200521 20:51:43.766912 1 cli/start.go:1030  using local environment variables: COCKROACH_CHANNEL=official-docker
+I200521 20:51:43.766951 1 cli/start.go:1037  process identity: uid 0 euid 0 gid 0 egid 0
+I200521 20:51:43.766996 1 cli/start.go:644  starting cockroach node
+I200521 20:51:43.771620 15 storage/engine/rocksdb.go:622  opening rocksdb instance at "/var/lib/cockroach/cockroach-temp852145118"
+I200521 20:51:44.119489 15 server/server.go:928  [n?] monitoring forward clock jumps based on server.clock.forward_jump_check_enabled
+I200521 20:51:44.120823 15 storage/engine/rocksdb.go:622  opening rocksdb instance at "/var/lib/cockroach"
+I200521 20:51:44.479990 15 server/config.go:502  [n?] 1 storage engine initialized
+I200521 20:51:44.479997 15 server/config.go:505  [n?] RocksDB cache size: 128 MiB
+I200521 20:51:44.480001 15 server/config.go:505  [n?] store 0: RocksDB, max size 0 B, max open file limit 1043576
+W200521 20:51:44.504497 15 cli/start.go:996  neither --listen-addr nor --advertise-addr was specified.
+The server will advertise "87c02a2f1dd9" to other nodes, is this routable?
+
+Consider using:
+- for local-only servers:  --listen-addr=localhost
+- for multi-node clusters: --advertise-addr=<host/IP addr>

@@ -5,18 +5,12 @@ Assets/Nakama/
 Assets/Suriyun/
 Assets/UltimateCleanGUIPack/
 Assets/Credits/
-Server/Temp/
-Server/Library/
 
 
 .collabignore
 /.vscode/
 /.vs/
 /bin/
-*.log
-*.sst
-Server/data/cockroach/certs/
-Server/data/cockroach/*-addr
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #

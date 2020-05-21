@@ -1,0 +1,416 @@
+I200512 19:29:33.808534 24 util/log/clog.go:1196  [config] file created at: 2020/05/12 19:29:33
+I200512 19:29:33.808534 24 util/log/clog.go:1196  [config] running on machine: 05d2a1ec0c4c
+I200512 19:29:33.808534 24 util/log/clog.go:1196  [config] binary: CockroachDB CCL v19.2.5 (x86_64-unknown-linux-gnu, built 2020/03/16 18:27:12, go1.12.12)
+I200512 19:29:33.808534 24 util/log/clog.go:1196  [config] arguments: [/cockroach/cockroach start --insecure --store=attrs=ssd,path=/var/lib/cockroach/]
+I200512 19:29:33.808534 24 util/log/clog.go:1196  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+I200512 19:29:33.808533 24 storage/engine/rocksdb.go:120  RocksDB version: 6.2.1
+I200512 19:29:33.816188 24 storage/engine/rocksdb.go:120  Git sha rocksdb_build_git_sha:@b7009236531fa784872f4823eabf393501e41bf2@
+I200512 19:29:33.816192 24 storage/engine/rocksdb.go:120  Compile date Mar 16 2020
+I200512 19:29:33.816196 24 storage/engine/rocksdb.go:120  DB SUMMARY
+I200512 19:29:33.816712 24 storage/engine/rocksdb.go:120  SST files in /var/lib/cockroach/cockroach-temp336178999 dir, Total Num: 0, files: 
+I200512 19:29:33.895899 24 storage/engine/rocksdb.go:120  Write Ahead Log file in /var/lib/cockroach/cockroach-temp336178999: 
+I200512 19:29:33.895905 24 storage/engine/rocksdb.go:120                          Options.error_if_exists: 0
+I200512 19:29:33.895908 24 storage/engine/rocksdb.go:120                        Options.create_if_missing: 1
+I200512 19:29:33.895911 24 storage/engine/rocksdb.go:120                          Options.paranoid_checks: 1
+I200512 19:29:33.895914 24 storage/engine/rocksdb.go:120                                      Options.env: 0x75757a0
+I200512 19:29:33.895917 24 storage/engine/rocksdb.go:120                                 Options.info_log: 0x7fe0e1a270e0
+I200512 19:29:33.895920 24 storage/engine/rocksdb.go:120                 Options.max_file_opening_threads: 16
+I200512 19:29:33.895923 24 storage/engine/rocksdb.go:120                               Options.statistics: 0x7fe0e1a34010
+I200512 19:29:33.895925 24 storage/engine/rocksdb.go:120                                Options.use_fsync: 0
+I200512 19:29:33.895929 24 storage/engine/rocksdb.go:120                        Options.max_log_file_size: 0
+I200512 19:29:33.895931 24 storage/engine/rocksdb.go:120                   Options.max_manifest_file_size: 134217728
+I200512 19:29:33.895934 24 storage/engine/rocksdb.go:120                    Options.log_file_time_to_roll: 0
+I200512 19:29:33.895936 24 storage/engine/rocksdb.go:120                        Options.keep_log_file_num: 1000
+I200512 19:29:33.895939 24 storage/engine/rocksdb.go:120                     Options.recycle_log_file_num: 1
+I200512 19:29:33.895956 24 storage/engine/rocksdb.go:120                          Options.allow_fallocate: 1
+I200512 19:29:33.895961 24 storage/engine/rocksdb.go:120                         Options.allow_mmap_reads: 0
+I200512 19:29:33.895964 24 storage/engine/rocksdb.go:120                        Options.allow_mmap_writes: 0
+I200512 19:29:33.895967 24 storage/engine/rocksdb.go:120                         Options.use_direct_reads: 0
+I200512 19:29:33.895969 24 storage/engine/rocksdb.go:120                         Options.use_direct_io_for_flush_and_compaction: 0
+I200512 19:29:33.895972 24 storage/engine/rocksdb.go:120           Options.create_missing_column_families: 0
+I200512 19:29:33.895975 24 storage/engine/rocksdb.go:120                               Options.db_log_dir: 
+I200512 19:29:33.895977 24 storage/engine/rocksdb.go:120                                  Options.wal_dir: /var/lib/cockroach/cockroach-temp336178999
+I200512 19:29:33.895980 24 storage/engine/rocksdb.go:120                 Options.table_cache_numshardbits: 6
+I200512 19:29:33.895983 24 storage/engine/rocksdb.go:120                       Options.max_subcompactions: 1
+I200512 19:29:33.895985 24 storage/engine/rocksdb.go:120                   Options.max_background_flushes: -1
+I200512 19:29:33.895988 24 storage/engine/rocksdb.go:120                          Options.WAL_ttl_seconds: 0
+I200512 19:29:33.895994 24 storage/engine/rocksdb.go:120                        Options.WAL_size_limit_MB: 0
+I200512 19:29:33.895997 24 storage/engine/rocksdb.go:120              Options.manifest_preallocation_size: 4194304
+I200512 19:29:33.895999 24 storage/engine/rocksdb.go:120                      Options.is_fd_close_on_exec: 1
+I200512 19:29:33.896002 24 storage/engine/rocksdb.go:120                    Options.advise_random_on_open: 1
+I200512 19:29:33.896004 24 storage/engine/rocksdb.go:120                     Options.db_write_buffer_size: 0
+I200512 19:29:33.896007 24 storage/engine/rocksdb.go:120                     Options.write_buffer_manager: 0x7fe0e1a190f0
+I200512 19:29:33.896010 24 storage/engine/rocksdb.go:120          Options.access_hint_on_compaction_start: 1
+I200512 19:29:33.896012 24 storage/engine/rocksdb.go:120   Options.new_table_reader_for_compaction_inputs: 0
+I200512 19:29:33.896015 24 storage/engine/rocksdb.go:120            Options.random_access_max_buffer_size: 1048576
+I200512 19:29:33.896017 24 storage/engine/rocksdb.go:120                       Options.use_adaptive_mutex: 0
+I200512 19:29:33.896020 24 storage/engine/rocksdb.go:120                             Options.rate_limiter: (nil)
+I200512 19:29:33.896024 24 storage/engine/rocksdb.go:120      Options.sst_file_manager.rate_bytes_per_sec: 0
+I200512 19:29:33.896027 24 storage/engine/rocksdb.go:120                        Options.wal_recovery_mode: 0
+I200512 19:29:33.896029 24 storage/engine/rocksdb.go:120                   Options.enable_thread_tracking: 0
+I200512 19:29:33.896032 24 storage/engine/rocksdb.go:120                   Options.enable_pipelined_write: 0
+I200512 19:29:33.896035 24 storage/engine/rocksdb.go:120          Options.allow_concurrent_memtable_write: 1
+I200512 19:29:33.896037 24 storage/engine/rocksdb.go:120       Options.enable_write_thread_adaptive_yield: 1
+I200512 19:29:33.896040 24 storage/engine/rocksdb.go:120              Options.write_thread_max_yield_usec: 100
+I200512 19:29:33.896042 24 storage/engine/rocksdb.go:120             Options.write_thread_slow_yield_usec: 3
+I200512 19:29:33.896045 24 storage/engine/rocksdb.go:120                                Options.row_cache: None
+I200512 19:29:33.896047 24 storage/engine/rocksdb.go:120                               Options.wal_filter: None
+I200512 19:29:33.896050 24 storage/engine/rocksdb.go:120              Options.avoid_flush_during_recovery: 0
+I200512 19:29:33.896052 24 storage/engine/rocksdb.go:120              Options.allow_ingest_behind: 0
+I200512 19:29:33.896055 24 storage/engine/rocksdb.go:120              Options.preserve_deletes: 0
+I200512 19:29:33.896058 24 storage/engine/rocksdb.go:120              Options.two_write_queues: 0
+I200512 19:29:33.896061 24 storage/engine/rocksdb.go:120              Options.manual_wal_flush: 1
+I200512 19:29:33.896064 24 storage/engine/rocksdb.go:120              Options.atomic_flush: 0
+I200512 19:29:33.896066 24 storage/engine/rocksdb.go:120              Options.avoid_unnecessary_blocking_io: 0
+I200512 19:29:33.896069 24 storage/engine/rocksdb.go:120              Options.max_background_jobs: 2
+I200512 19:29:33.896072 24 storage/engine/rocksdb.go:120              Options.max_background_compactions: -1
+I200512 19:29:33.896074 24 storage/engine/rocksdb.go:120              Options.avoid_flush_during_shutdown: 0
+I200512 19:29:33.896077 24 storage/engine/rocksdb.go:120            Options.writable_file_max_buffer_size: 1048576
+I200512 19:29:33.896080 24 storage/engine/rocksdb.go:120              Options.delayed_write_rate : 16777216
+I200512 19:29:33.896082 24 storage/engine/rocksdb.go:120              Options.max_total_wal_size: 0
+I200512 19:29:33.896085 24 storage/engine/rocksdb.go:120              Options.delete_obsolete_files_period_micros: 21600000000
+I200512 19:29:33.896088 24 storage/engine/rocksdb.go:120                    Options.stats_dump_period_sec: 0
+I200512 19:29:33.896090 24 storage/engine/rocksdb.go:120                  Options.stats_persist_period_sec: 600
+I200512 19:29:33.896093 24 storage/engine/rocksdb.go:120                  Options.stats_history_buffer_size: 1048576
+I200512 19:29:33.896098 24 storage/engine/rocksdb.go:120                           Options.max_open_files: 128
+I200512 19:29:33.896101 24 storage/engine/rocksdb.go:120                           Options.bytes_per_sync: 524288
+I200512 19:29:33.896104 24 storage/engine/rocksdb.go:120                       Options.wal_bytes_per_sync: 0
+I200512 19:29:33.896106 24 storage/engine/rocksdb.go:120                    Options.strict_bytes_per_sync: 1
+I200512 19:29:33.896109 24 storage/engine/rocksdb.go:120        Options.compaction_readahead_size: 0
+I200512 19:29:33.896112 24 storage/engine/rocksdb.go:120  Compression algorithms supported:
+I200512 19:29:33.896115 24 storage/engine/rocksdb.go:120  	kZSTDNotFinalCompression supported: 0
+I200512 19:29:33.896118 24 storage/engine/rocksdb.go:120  	kZSTD supported: 0
+I200512 19:29:33.896120 24 storage/engine/rocksdb.go:120  	kXpressCompression supported: 0
+I200512 19:29:33.896123 24 storage/engine/rocksdb.go:120  	kLZ4HCCompression supported: 0
+I200512 19:29:33.896126 24 storage/engine/rocksdb.go:120  	kLZ4Compression supported: 0
+I200512 19:29:33.896129 24 storage/engine/rocksdb.go:120  	kBZip2Compression supported: 0
+I200512 19:29:33.896132 24 storage/engine/rocksdb.go:120  	kZlibCompression supported: 0
+I200512 19:29:33.896134 24 storage/engine/rocksdb.go:120  	kSnappyCompression supported: 1
+I200512 19:29:33.896142 24 storage/engine/rocksdb.go:120  Fast CRC32 supported: Supported on x86
+I200512 19:29:33.898253 24 storage/engine/rocksdb.go:120  [db/db_impl_open.cc:242] Creating manifest 1 
+I200512 19:29:33.917959 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4072] Recovering from manifest file: /var/lib/cockroach/cockroach-temp336178999/MANIFEST-000001
+I200512 19:29:33.919173 24 storage/engine/rocksdb.go:120  [db/column_family.cc:488] --------------- Options for column family [default]:
+I200512 19:29:33.919180 24 storage/engine/rocksdb.go:120                Options.comparator: cockroach_comparator
+I200512 19:29:33.919183 24 storage/engine/rocksdb.go:120            Options.merge_operator: cockroach_merge_operator
+I200512 19:29:33.919186 24 storage/engine/rocksdb.go:120         Options.compaction_filter: None
+I200512 19:29:33.919189 24 storage/engine/rocksdb.go:120         Options.compaction_filter_factory: None
+I200512 19:29:33.919192 24 storage/engine/rocksdb.go:120          Options.memtable_factory: SkipListFactory
+I200512 19:29:33.919195 24 storage/engine/rocksdb.go:120             Options.table_factory: BlockBasedTable
+I200512 19:29:33.919214 24 storage/engine/rocksdb.go:120             table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0x7fe0e1a28030)
+  cache_index_and_filter_blocks: 0
+  cache_index_and_filter_blocks_with_high_priority: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  pin_top_level_index_and_filter: 1
+  index_type: 0
+  data_block_index_type: 0
+  index_shortening: 1
+  data_block_hash_table_util_ratio: 0.750000
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0x7fe0e1a1c010
+  block_cache_name: LRUCache
+  block_cache_options:
+    capacity : 1048576
+    num_shard_bits : 4
+    strict_capacity_limit : 0
+    memory_allocator : None
+    high_pri_pool_ratio: 0.000
+  block_cache_compressed: (nil)
+  persistent_cache: (nil)
+  block_size: 32768
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  metadata_block_size: 4096
+  partition_filters: 0
+  use_delta_encoding: 1
+  filter_policy: rocksdb.BuiltinBloomFilter
+  whole_key_filtering: 0
+  verify_compression: 0
+  read_amp_bytes_per_bit: 0
+  format_version: 2
+  enable_index_compression: 1
+  block_align: 0
+I200512 19:29:33.919219 24 storage/engine/rocksdb.go:120         Options.write_buffer_size: 67108864
+I200512 19:29:33.919259 24 storage/engine/rocksdb.go:120   Options.max_write_buffer_number: 4
+I200512 19:29:33.919263 24 storage/engine/rocksdb.go:120           Options.compression: Snappy
+I200512 19:29:33.919266 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression: Disabled
+I200512 19:29:33.919269 24 storage/engine/rocksdb.go:120        Options.prefix_extractor: cockroach_prefix_extractor
+I200512 19:29:33.919272 24 storage/engine/rocksdb.go:120    Options.memtable_insert_with_hint_prefix_extractor: nullptr
+I200512 19:29:33.919275 24 storage/engine/rocksdb.go:120              Options.num_levels: 7
+I200512 19:29:33.919277 24 storage/engine/rocksdb.go:120         Options.min_write_buffer_number_to_merge: 1
+I200512 19:29:33.919280 24 storage/engine/rocksdb.go:120      Options.max_write_buffer_number_to_maintain: 0
+I200512 19:29:33.919282 24 storage/engine/rocksdb.go:120             Options.bottommost_compression_opts.window_bits: -14
+I200512 19:29:33.919285 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression_opts.level: 32767
+I200512 19:29:33.919288 24 storage/engine/rocksdb.go:120                Options.bottommost_compression_opts.strategy: 0
+I200512 19:29:33.919290 24 storage/engine/rocksdb.go:120          Options.bottommost_compression_opts.max_dict_bytes: 0
+I200512 19:29:33.919293 24 storage/engine/rocksdb.go:120          Options.bottommost_compression_opts.zstd_max_train_bytes: 0
+I200512 19:29:33.919306 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression_opts.enabled: false
+I200512 19:29:33.919312 24 storage/engine/rocksdb.go:120             Options.compression_opts.window_bits: -14
+I200512 19:29:33.919314 24 storage/engine/rocksdb.go:120                   Options.compression_opts.level: 32767
+I200512 19:29:33.919317 24 storage/engine/rocksdb.go:120                Options.compression_opts.strategy: 0
+I200512 19:29:33.919320 24 storage/engine/rocksdb.go:120          Options.compression_opts.max_dict_bytes: 0
+I200512 19:29:33.919322 24 storage/engine/rocksdb.go:120          Options.compression_opts.zstd_max_train_bytes: 0
+I200512 19:29:33.919325 24 storage/engine/rocksdb.go:120                   Options.compression_opts.enabled: false
+I200512 19:29:33.919331 24 storage/engine/rocksdb.go:120       Options.level0_file_num_compaction_trigger: 2
+I200512 19:29:33.919334 24 storage/engine/rocksdb.go:120           Options.level0_slowdown_writes_trigger: 950
+I200512 19:29:33.919336 24 storage/engine/rocksdb.go:120               Options.level0_stop_writes_trigger: 1000
+I200512 19:29:33.919339 24 storage/engine/rocksdb.go:120                    Options.target_file_size_base: 4194304
+I200512 19:29:33.919342 24 storage/engine/rocksdb.go:120              Options.target_file_size_multiplier: 2
+I200512 19:29:33.919344 24 storage/engine/rocksdb.go:120                 Options.max_bytes_for_level_base: 67108864
+I200512 19:29:33.919347 24 storage/engine/rocksdb.go:120  Options.level_compaction_dynamic_level_bytes: 1
+I200512 19:29:33.919350 24 storage/engine/rocksdb.go:120           Options.max_bytes_for_level_multiplier: 10.000000
+I200512 19:29:33.919353 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[0]: 1
+I200512 19:29:33.919356 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[1]: 1
+I200512 19:29:33.919358 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[2]: 1
+I200512 19:29:33.919361 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[3]: 1
+I200512 19:29:33.919364 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[4]: 1
+I200512 19:29:33.919366 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[5]: 1
+I200512 19:29:33.919369 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[6]: 1
+I200512 19:29:33.919371 24 storage/engine/rocksdb.go:120        Options.max_sequential_skip_in_iterations: 8
+I200512 19:29:33.919374 24 storage/engine/rocksdb.go:120                     Options.max_compaction_bytes: 104857600
+I200512 19:29:33.919376 24 storage/engine/rocksdb.go:120                         Options.arena_block_size: 8388608
+I200512 19:29:33.919379 24 storage/engine/rocksdb.go:120    Options.soft_pending_compaction_bytes_limit: 2199023255552
+I200512 19:29:33.919382 24 storage/engine/rocksdb.go:120    Options.hard_pending_compaction_bytes_limit: 4400193994752
+I200512 19:29:33.919385 24 storage/engine/rocksdb.go:120        Options.rate_limit_delay_max_milliseconds: 100
+I200512 19:29:33.919387 24 storage/engine/rocksdb.go:120                 Options.disable_auto_compactions: 0
+I200512 19:29:33.919391 24 storage/engine/rocksdb.go:120                         Options.compaction_style: kCompactionStyleLevel
+I200512 19:29:33.919394 24 storage/engine/rocksdb.go:120                           Options.compaction_pri: kMinOverlappingRatio
+I200512 19:29:33.919397 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.size_ratio: 1
+I200512 19:29:33.919400 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.min_merge_width: 2
+I200512 19:29:33.919402 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.max_merge_width: 4294967295
+I200512 19:29:33.919405 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.max_size_amplification_percent: 200
+I200512 19:29:33.919408 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.compression_size_percent: -1
+I200512 19:29:33.919411 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.stop_style: kCompactionStopStyleTotalSize
+I200512 19:29:33.919413 24 storage/engine/rocksdb.go:120  Options.compaction_options_fifo.max_table_files_size: 1073741824
+I200512 19:29:33.919416 24 storage/engine/rocksdb.go:120  Options.compaction_options_fifo.allow_compaction: 0
+I200512 19:29:33.919420 24 storage/engine/rocksdb.go:120                    Options.table_properties_collectors: TimeBoundTblPropCollectorFactory; DeleteRangeTblPropCollectorFactory; 
+I200512 19:29:33.919424 24 storage/engine/rocksdb.go:120                    Options.inplace_update_support: 0
+I200512 19:29:33.919426 24 storage/engine/rocksdb.go:120                  Options.inplace_update_num_locks: 10000
+I200512 19:29:33.919429 24 storage/engine/rocksdb.go:120                Options.memtable_prefix_bloom_size_ratio: 0.000000
+I200512 19:29:33.919432 24 storage/engine/rocksdb.go:120                Options.memtable_whole_key_filtering: 0
+I200512 19:29:33.919435 24 storage/engine/rocksdb.go:120    Options.memtable_huge_page_size: 0
+I200512 19:29:33.919437 24 storage/engine/rocksdb.go:120                            Options.bloom_locality: 0
+I200512 19:29:33.919440 24 storage/engine/rocksdb.go:120                     Options.max_successive_merges: 0
+I200512 19:29:33.919454 24 storage/engine/rocksdb.go:120                 Options.optimize_filters_for_hits: 1
+I200512 19:29:33.919461 24 storage/engine/rocksdb.go:120                 Options.paranoid_file_checks: 0
+I200512 19:29:33.919465 24 storage/engine/rocksdb.go:120                 Options.force_consistency_checks: 0
+I200512 19:29:33.919468 24 storage/engine/rocksdb.go:120                 Options.report_bg_io_stats: 0
+I200512 19:29:33.919471 24 storage/engine/rocksdb.go:120                                Options.ttl: 0
+I200512 19:29:33.919475 24 storage/engine/rocksdb.go:120           Options.periodic_compaction_seconds: 0
+I200512 19:29:33.920507 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4286] Recovered from manifest file:/var/lib/cockroach/cockroach-temp336178999/MANIFEST-000001 succeeded,manifest_file_number is 1, next_file_number is 3, last_sequence is 0, log_number is 0,prev_log_number is 0,max_column_family is 0,min_log_number_to_keep is 0
+I200512 19:29:33.920516 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4295] Column family [default] (ID 0), log number is 0
+I200512 19:29:33.940040 24 storage/engine/rocksdb.go:120  DB pointer 0x7fe0e1aa4000
+I200512 19:29:33.961340 24 storage/engine/rocksdb.go:120  RocksDB version: 6.2.1
+I200512 19:29:33.961349 24 storage/engine/rocksdb.go:120  Git sha rocksdb_build_git_sha:@b7009236531fa784872f4823eabf393501e41bf2@
+I200512 19:29:33.961352 24 storage/engine/rocksdb.go:120  Compile date Mar 16 2020
+I200512 19:29:33.961355 24 storage/engine/rocksdb.go:120  DB SUMMARY
+I200512 19:29:33.962314 24 storage/engine/rocksdb.go:120  CURRENT file:  CURRENT
+I200512 19:29:33.962321 24 storage/engine/rocksdb.go:120  IDENTITY file:  IDENTITY
+I200512 19:29:33.962703 24 storage/engine/rocksdb.go:120  MANIFEST file:  MANIFEST-000239 size: 594 Bytes
+I200512 19:29:33.962709 24 storage/engine/rocksdb.go:120  SST files in /var/lib/cockroach dir, Total Num: 2, files: 000243.sst 000244.sst 
+I200512 19:29:33.962712 24 storage/engine/rocksdb.go:120  Write Ahead Log file in /var/lib/cockroach: 000240.log size: 3342598 ; 
+I200512 19:29:33.962715 24 storage/engine/rocksdb.go:120                          Options.error_if_exists: 0
+I200512 19:29:33.962718 24 storage/engine/rocksdb.go:120                        Options.create_if_missing: 1
+I200512 19:29:33.962721 24 storage/engine/rocksdb.go:120                          Options.paranoid_checks: 1
+I200512 19:29:33.962724 24 storage/engine/rocksdb.go:120                                      Options.env: 0x75757a0
+I200512 19:29:33.962726 24 storage/engine/rocksdb.go:120                                 Options.info_log: 0x7fe0ea887f00
+I200512 19:29:33.962729 24 storage/engine/rocksdb.go:120                 Options.max_file_opening_threads: 16
+I200512 19:29:33.962732 24 storage/engine/rocksdb.go:120                               Options.statistics: 0x7fe0ea81d8d0
+I200512 19:29:33.962734 24 storage/engine/rocksdb.go:120                                Options.use_fsync: 0
+I200512 19:29:33.962737 24 storage/engine/rocksdb.go:120                        Options.max_log_file_size: 0
+I200512 19:29:33.962740 24 storage/engine/rocksdb.go:120                   Options.max_manifest_file_size: 134217728
+I200512 19:29:33.962742 24 storage/engine/rocksdb.go:120                    Options.log_file_time_to_roll: 0
+I200512 19:29:33.962745 24 storage/engine/rocksdb.go:120                        Options.keep_log_file_num: 1000
+I200512 19:29:33.962748 24 storage/engine/rocksdb.go:120                     Options.recycle_log_file_num: 1
+I200512 19:29:33.962751 24 storage/engine/rocksdb.go:120                          Options.allow_fallocate: 1
+I200512 19:29:33.962753 24 storage/engine/rocksdb.go:120                         Options.allow_mmap_reads: 0
+I200512 19:29:33.962756 24 storage/engine/rocksdb.go:120                        Options.allow_mmap_writes: 0
+I200512 19:29:33.962758 24 storage/engine/rocksdb.go:120                         Options.use_direct_reads: 0
+I200512 19:29:33.962761 24 storage/engine/rocksdb.go:120                         Options.use_direct_io_for_flush_and_compaction: 0
+I200512 19:29:33.962764 24 storage/engine/rocksdb.go:120           Options.create_missing_column_families: 0
+I200512 19:29:33.962766 24 storage/engine/rocksdb.go:120                               Options.db_log_dir: 
+I200512 19:29:33.962769 24 storage/engine/rocksdb.go:120                                  Options.wal_dir: /var/lib/cockroach
+I200512 19:29:33.962772 24 storage/engine/rocksdb.go:120                 Options.table_cache_numshardbits: 6
+I200512 19:29:33.962775 24 storage/engine/rocksdb.go:120                       Options.max_subcompactions: 1
+I200512 19:29:33.962778 24 storage/engine/rocksdb.go:120                   Options.max_background_flushes: -1
+I200512 19:29:33.962781 24 storage/engine/rocksdb.go:120                          Options.WAL_ttl_seconds: 0
+I200512 19:29:33.962783 24 storage/engine/rocksdb.go:120                        Options.WAL_size_limit_MB: 0
+I200512 19:29:33.962786 24 storage/engine/rocksdb.go:120              Options.manifest_preallocation_size: 4194304
+I200512 19:29:33.962813 24 storage/engine/rocksdb.go:120                      Options.is_fd_close_on_exec: 1
+I200512 19:29:33.962819 24 storage/engine/rocksdb.go:120                    Options.advise_random_on_open: 1
+I200512 19:29:33.962822 24 storage/engine/rocksdb.go:120                     Options.db_write_buffer_size: 0
+I200512 19:29:33.962825 24 storage/engine/rocksdb.go:120                     Options.write_buffer_manager: 0x7fe0ea860cb0
+I200512 19:29:33.962828 24 storage/engine/rocksdb.go:120          Options.access_hint_on_compaction_start: 1
+I200512 19:29:33.962830 24 storage/engine/rocksdb.go:120   Options.new_table_reader_for_compaction_inputs: 0
+I200512 19:29:33.962833 24 storage/engine/rocksdb.go:120            Options.random_access_max_buffer_size: 1048576
+I200512 19:29:33.962836 24 storage/engine/rocksdb.go:120                       Options.use_adaptive_mutex: 0
+I200512 19:29:33.962839 24 storage/engine/rocksdb.go:120                             Options.rate_limiter: (nil)
+I200512 19:29:33.962842 24 storage/engine/rocksdb.go:120      Options.sst_file_manager.rate_bytes_per_sec: 0
+I200512 19:29:33.962845 24 storage/engine/rocksdb.go:120                        Options.wal_recovery_mode: 0
+I200512 19:29:33.962847 24 storage/engine/rocksdb.go:120                   Options.enable_thread_tracking: 0
+I200512 19:29:33.962850 24 storage/engine/rocksdb.go:120                   Options.enable_pipelined_write: 0
+I200512 19:29:33.962853 24 storage/engine/rocksdb.go:120          Options.allow_concurrent_memtable_write: 1
+I200512 19:29:33.962856 24 storage/engine/rocksdb.go:120       Options.enable_write_thread_adaptive_yield: 1
+I200512 19:29:33.962859 24 storage/engine/rocksdb.go:120              Options.write_thread_max_yield_usec: 100
+I200512 19:29:33.962862 24 storage/engine/rocksdb.go:120             Options.write_thread_slow_yield_usec: 3
+I200512 19:29:33.962864 24 storage/engine/rocksdb.go:120                                Options.row_cache: None
+I200512 19:29:33.962867 24 storage/engine/rocksdb.go:120                               Options.wal_filter: None
+I200512 19:29:33.962869 24 storage/engine/rocksdb.go:120              Options.avoid_flush_during_recovery: 0
+I200512 19:29:33.962872 24 storage/engine/rocksdb.go:120              Options.allow_ingest_behind: 0
+I200512 19:29:33.962875 24 storage/engine/rocksdb.go:120              Options.preserve_deletes: 0
+I200512 19:29:33.962877 24 storage/engine/rocksdb.go:120              Options.two_write_queues: 0
+I200512 19:29:33.962880 24 storage/engine/rocksdb.go:120              Options.manual_wal_flush: 1
+I200512 19:29:33.962882 24 storage/engine/rocksdb.go:120              Options.atomic_flush: 0
+I200512 19:29:33.962885 24 storage/engine/rocksdb.go:120              Options.avoid_unnecessary_blocking_io: 0
+I200512 19:29:33.962888 24 storage/engine/rocksdb.go:120              Options.max_background_jobs: 2
+I200512 19:29:33.962890 24 storage/engine/rocksdb.go:120              Options.max_background_compactions: -1
+I200512 19:29:33.962893 24 storage/engine/rocksdb.go:120              Options.avoid_flush_during_shutdown: 0
+I200512 19:29:33.962896 24 storage/engine/rocksdb.go:120            Options.writable_file_max_buffer_size: 1048576
+I200512 19:29:33.962898 24 storage/engine/rocksdb.go:120              Options.delayed_write_rate : 16777216
+I200512 19:29:33.962901 24 storage/engine/rocksdb.go:120              Options.max_total_wal_size: 0
+I200512 19:29:33.962903 24 storage/engine/rocksdb.go:120              Options.delete_obsolete_files_period_micros: 21600000000
+I200512 19:29:33.962906 24 storage/engine/rocksdb.go:120                    Options.stats_dump_period_sec: 0
+I200512 19:29:33.962909 24 storage/engine/rocksdb.go:120                  Options.stats_persist_period_sec: 600
+I200512 19:29:33.962911 24 storage/engine/rocksdb.go:120                  Options.stats_history_buffer_size: 1048576
+I200512 19:29:33.962914 24 storage/engine/rocksdb.go:120                           Options.max_open_files: 1043576
+I200512 19:29:33.962916 24 storage/engine/rocksdb.go:120                           Options.bytes_per_sync: 524288
+I200512 19:29:33.962919 24 storage/engine/rocksdb.go:120                       Options.wal_bytes_per_sync: 0
+I200512 19:29:33.962921 24 storage/engine/rocksdb.go:120                    Options.strict_bytes_per_sync: 1
+I200512 19:29:33.962924 24 storage/engine/rocksdb.go:120        Options.compaction_readahead_size: 0
+I200512 19:29:33.962927 24 storage/engine/rocksdb.go:120  Compression algorithms supported:
+I200512 19:29:33.962930 24 storage/engine/rocksdb.go:120  	kZSTDNotFinalCompression supported: 0
+I200512 19:29:33.962932 24 storage/engine/rocksdb.go:120  	kZSTD supported: 0
+I200512 19:29:33.962935 24 storage/engine/rocksdb.go:120  	kXpressCompression supported: 0
+I200512 19:29:33.962970 24 storage/engine/rocksdb.go:120  	kLZ4HCCompression supported: 0
+I200512 19:29:33.962979 24 storage/engine/rocksdb.go:120  	kLZ4Compression supported: 0
+I200512 19:29:33.962983 24 storage/engine/rocksdb.go:120  	kBZip2Compression supported: 0
+I200512 19:29:33.962986 24 storage/engine/rocksdb.go:120  	kZlibCompression supported: 0
+I200512 19:29:33.962990 24 storage/engine/rocksdb.go:120  	kSnappyCompression supported: 1
+I200512 19:29:33.962998 24 storage/engine/rocksdb.go:120  Fast CRC32 supported: Supported on x86
+I200512 19:29:33.968766 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4072] Recovering from manifest file: /var/lib/cockroach/MANIFEST-000239
+I200512 19:29:33.969478 24 storage/engine/rocksdb.go:120  [db/column_family.cc:488] --------------- Options for column family [default]:
+I200512 19:29:33.969487 24 storage/engine/rocksdb.go:120                Options.comparator: cockroach_comparator
+I200512 19:29:33.969505 24 storage/engine/rocksdb.go:120            Options.merge_operator: cockroach_merge_operator
+I200512 19:29:33.969509 24 storage/engine/rocksdb.go:120         Options.compaction_filter: None
+I200512 19:29:33.969516 24 storage/engine/rocksdb.go:120         Options.compaction_filter_factory: None
+I200512 19:29:33.969519 24 storage/engine/rocksdb.go:120          Options.memtable_factory: SkipListFactory
+I200512 19:29:33.969522 24 storage/engine/rocksdb.go:120             Options.table_factory: BlockBasedTable
+I200512 19:29:33.969544 24 storage/engine/rocksdb.go:120             table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0x7fe0ea824038)
+  cache_index_and_filter_blocks: 0
+  cache_index_and_filter_blocks_with_high_priority: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  pin_top_level_index_and_filter: 1
+  index_type: 0
+  data_block_index_type: 0
+  index_shortening: 1
+  data_block_hash_table_util_ratio: 0.750000
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0x7fe0ea87a190
+  block_cache_name: LRUCache
+  block_cache_options:
+    capacity : 67108864
+    num_shard_bits : 4
+    strict_capacity_limit : 0
+    memory_allocator : None
+    high_pri_pool_ratio: 0.000
+  block_cache_compressed: (nil)
+  persistent_cache: (nil)
+  block_size: 32768
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  metadata_block_size: 4096
+  partition_filters: 0
+  use_delta_encoding: 1
+  filter_policy: rocksdb.BuiltinBloomFilter
+  whole_key_filtering: 0
+  verify_compression: 0
+  read_amp_bytes_per_bit: 0
+  format_version: 2
+  enable_index_compression: 1
+  block_align: 0
+I200512 19:29:33.969550 24 storage/engine/rocksdb.go:120         Options.write_buffer_size: 67108864
+I200512 19:29:33.969554 24 storage/engine/rocksdb.go:120   Options.max_write_buffer_number: 4
+I200512 19:29:33.969557 24 storage/engine/rocksdb.go:120           Options.compression: Snappy
+I200512 19:29:33.969559 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression: Disabled
+I200512 19:29:33.969562 24 storage/engine/rocksdb.go:120        Options.prefix_extractor: cockroach_prefix_extractor
+I200512 19:29:33.969565 24 storage/engine/rocksdb.go:120    Options.memtable_insert_with_hint_prefix_extractor: nullptr
+I200512 19:29:33.969567 24 storage/engine/rocksdb.go:120              Options.num_levels: 7
+I200512 19:29:33.969570 24 storage/engine/rocksdb.go:120         Options.min_write_buffer_number_to_merge: 1
+I200512 19:29:33.969581 24 storage/engine/rocksdb.go:120      Options.max_write_buffer_number_to_maintain: 0
+I200512 19:29:33.969584 24 storage/engine/rocksdb.go:120             Options.bottommost_compression_opts.window_bits: -14
+I200512 19:29:33.969587 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression_opts.level: 32767
+I200512 19:29:33.969589 24 storage/engine/rocksdb.go:120                Options.bottommost_compression_opts.strategy: 0
+I200512 19:29:33.969592 24 storage/engine/rocksdb.go:120          Options.bottommost_compression_opts.max_dict_bytes: 0
+I200512 19:29:33.969595 24 storage/engine/rocksdb.go:120          Options.bottommost_compression_opts.zstd_max_train_bytes: 0
+I200512 19:29:33.969597 24 storage/engine/rocksdb.go:120                   Options.bottommost_compression_opts.enabled: false
+I200512 19:29:33.969600 24 storage/engine/rocksdb.go:120             Options.compression_opts.window_bits: -14
+I200512 19:29:33.969603 24 storage/engine/rocksdb.go:120                   Options.compression_opts.level: 32767
+I200512 19:29:33.969605 24 storage/engine/rocksdb.go:120                Options.compression_opts.strategy: 0
+I200512 19:29:33.969608 24 storage/engine/rocksdb.go:120          Options.compression_opts.max_dict_bytes: 0
+I200512 19:29:33.969611 24 storage/engine/rocksdb.go:120          Options.compression_opts.zstd_max_train_bytes: 0
+I200512 19:29:33.969614 24 storage/engine/rocksdb.go:120                   Options.compression_opts.enabled: false
+I200512 19:29:33.969617 24 storage/engine/rocksdb.go:120       Options.level0_file_num_compaction_trigger: 2
+I200512 19:29:33.969620 24 storage/engine/rocksdb.go:120           Options.level0_slowdown_writes_trigger: 950
+I200512 19:29:33.969623 24 storage/engine/rocksdb.go:120               Options.level0_stop_writes_trigger: 1000
+I200512 19:29:33.969626 24 storage/engine/rocksdb.go:120                    Options.target_file_size_base: 4194304
+I200512 19:29:33.969629 24 storage/engine/rocksdb.go:120              Options.target_file_size_multiplier: 2
+I200512 19:29:33.969632 24 storage/engine/rocksdb.go:120                 Options.max_bytes_for_level_base: 67108864
+I200512 19:29:33.969634 24 storage/engine/rocksdb.go:120  Options.level_compaction_dynamic_level_bytes: 1
+I200512 19:29:33.969637 24 storage/engine/rocksdb.go:120           Options.max_bytes_for_level_multiplier: 10.000000
+I200512 19:29:33.969640 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[0]: 1
+I200512 19:29:33.969643 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[1]: 1
+I200512 19:29:33.969645 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[2]: 1
+I200512 19:29:33.969648 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[3]: 1
+I200512 19:29:33.969657 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[4]: 1
+I200512 19:29:33.969660 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[5]: 1
+I200512 19:29:33.969663 24 storage/engine/rocksdb.go:120  Options.max_bytes_for_level_multiplier_addtl[6]: 1
+I200512 19:29:33.969665 24 storage/engine/rocksdb.go:120        Options.max_sequential_skip_in_iterations: 8
+I200512 19:29:33.969668 24 storage/engine/rocksdb.go:120                     Options.max_compaction_bytes: 104857600
+I200512 19:29:33.969670 24 storage/engine/rocksdb.go:120                         Options.arena_block_size: 8388608
+I200512 19:29:33.969673 24 storage/engine/rocksdb.go:120    Options.soft_pending_compaction_bytes_limit: 2199023255552
+I200512 19:29:33.969675 24 storage/engine/rocksdb.go:120    Options.hard_pending_compaction_bytes_limit: 4400193994752
+I200512 19:29:33.969678 24 storage/engine/rocksdb.go:120        Options.rate_limit_delay_max_milliseconds: 100
+I200512 19:29:33.969682 24 storage/engine/rocksdb.go:120                 Options.disable_auto_compactions: 0
+I200512 19:29:33.969685 24 storage/engine/rocksdb.go:120                         Options.compaction_style: kCompactionStyleLevel
+I200512 19:29:33.969688 24 storage/engine/rocksdb.go:120                           Options.compaction_pri: kMinOverlappingRatio
+I200512 19:29:33.969692 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.size_ratio: 1
+I200512 19:29:33.969695 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.min_merge_width: 2
+I200512 19:29:33.969699 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.max_merge_width: 4294967295
+I200512 19:29:33.969702 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.max_size_amplification_percent: 200
+I200512 19:29:33.969705 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.compression_size_percent: -1
+I200512 19:29:33.969708 24 storage/engine/rocksdb.go:120  Options.compaction_options_universal.stop_style: kCompactionStopStyleTotalSize
+I200512 19:29:33.969711 24 storage/engine/rocksdb.go:120  Options.compaction_options_fifo.max_table_files_size: 1073741824
+I200512 19:29:33.969713 24 storage/engine/rocksdb.go:120  Options.compaction_options_fifo.allow_compaction: 0
+I200512 19:29:33.969718 24 storage/engine/rocksdb.go:120                    Options.table_properties_collectors: TimeBoundTblPropCollectorFactory; DeleteRangeTblPropCollectorFactory; 
+I200512 19:29:33.969721 24 storage/engine/rocksdb.go:120                    Options.inplace_update_support: 0
+I200512 19:29:33.969732 24 storage/engine/rocksdb.go:120                  Options.inplace_update_num_locks: 10000
+I200512 19:29:33.969735 24 storage/engine/rocksdb.go:120                Options.memtable_prefix_bloom_size_ratio: 0.000000
+I200512 19:29:33.969738 24 storage/engine/rocksdb.go:120                Options.memtable_whole_key_filtering: 0
+I200512 19:29:33.969740 24 storage/engine/rocksdb.go:120    Options.memtable_huge_page_size: 0
+I200512 19:29:33.969743 24 storage/engine/rocksdb.go:120                            Options.bloom_locality: 0
+I200512 19:29:33.969746 24 storage/engine/rocksdb.go:120                     Options.max_successive_merges: 0
+I200512 19:29:33.969748 24 storage/engine/rocksdb.go:120                 Options.optimize_filters_for_hits: 1
+I200512 19:29:33.969751 24 storage/engine/rocksdb.go:120                 Options.paranoid_file_checks: 0
+I200512 19:29:33.969754 24 storage/engine/rocksdb.go:120                 Options.force_consistency_checks: 0
+I200512 19:29:33.969756 24 storage/engine/rocksdb.go:120                 Options.report_bg_io_stats: 0
+I200512 19:29:33.969759 24 storage/engine/rocksdb.go:120                                Options.ttl: 0
+I200512 19:29:33.969762 24 storage/engine/rocksdb.go:120           Options.periodic_compaction_seconds: 0
+I200512 19:29:33.980906 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4286] Recovered from manifest file:/var/lib/cockroach/MANIFEST-000239 succeeded,manifest_file_number is 239, next_file_number is 246, last_sequence is 5883201, log_number is 238,prev_log_number is 0,max_column_family is 0,min_log_number_to_keep is 0
+I200512 19:29:33.980934 24 storage/engine/rocksdb.go:120  [db/version_set.cc:4295] Column family [default] (ID 0), log number is 238
+I200512 19:29:33.984484 24 storage/engine/rocksdb.go:120  EVENT_LOG_v1 {"time_micros": 1589311773984460, "job": 1, "event": "recovery_started", "log_files": [240]}
+I200512 19:29:33.984494 24 storage/engine/rocksdb.go:120  [db/db_impl_open.cc:598] Recovering log #240 mode 0
+I200512 19:29:34.042190 24 storage/engine/rocksdb.go:120  EVENT_LOG_v1 {"time_micros": 1589311774042148, "cf_name": "default", "job": 1, "event": "table_file_creation", "file_number": 246, "file_size": 106923, "table_properties": {"data_size": 103159, "index_size": 586, "index_partitions": 0, "top_level_index_size": 0, "index_key_is_user_key": 0, "index_value_is_delta_encoded": 0, "filter_size": 2373, "raw_key_size": 68274, "raw_average_key_size": 35, "raw_value_size": 441313, "raw_average_value_size": 231, "num_data_blocks": 12, "num_entries": 1910, "num_deletions": 747, "num_merge_operands": 664, "num_range_deletions": 664, "format_version": 0, "fixed_key_len": 0, "filter_policy": "rocksdb.BuiltinBloomFilter", "column_family_name": "default", "column_family_id": 0, "comparator": "cockroach_comparator", "merge_operator": "cockroach_merge_operator", "prefix_extractor_name": "cockroach_prefix_extractor", "property_collectors": "[TimeBoundTblPropCollectorFactory,DeleteRangeTblPropCollectorFactory]", "compression": "Snappy", "compression_options": "window_bits=-14; level=32767; strategy=0; max_dict_bytes=0; zstd_max_train_bytes=0; enabled=0; ", "creation_time": 1589311774, "oldest_key_time": 3, "file_creation_time": 0}}
+I200512 19:29:34.042788 24 storage/engine/rocksdb.go:120  [db/version_set.cc:3560] Creating manifest 247
+I200512 19:29:34.055166 24 storage/engine/rocksdb.go:120  EVENT_LOG_v1 {"time_micros": 1589311774055143, "job": 1, "event": "recovery_finished"}
+I200512 19:29:34.085178 24 storage/engine/rocksdb.go:120  DB pointer 0x7fe0ea973000
+I200512 19:30:19.404042 929 storage/engine/rocksdb.go:120  bloom filter utility:    -nan%
+I200512 19:30:19.404377 929 storage/engine/rocksdb.go:120  [db/db_impl.cc:392] Shutdown: canceling all background work
+I200512 19:30:19.406685 929 storage/engine/rocksdb.go:120  [db/db_impl.cc:565] Shutdown complete
+I200512 19:30:19.419146 929 storage/engine/rocksdb.go:120  bloom filter utility:    54.8%
+I200512 19:30:19.419731 929 storage/engine/rocksdb.go:120  [db/db_impl.cc:392] Shutdown: canceling all background work
+I200512 19:30:19.425813 929 storage/engine/rocksdb.go:120  [db/db_impl.cc:565] Shutdown complete
