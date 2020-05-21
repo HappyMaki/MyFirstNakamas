@@ -120,6 +120,7 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
     {
         yield return new WaitForSeconds(0.5f);
         server_url = "http://" + serverIpAddress + ":" + serverPort.ToString();
+        Debug.Log(server_url);
         UnityWebRequest resp = UnityWebRequest.Get(server_url);
         yield return resp.SendWebRequest();
 
