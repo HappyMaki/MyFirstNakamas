@@ -49,6 +49,11 @@ public class NakamaApi : SingletonBehaviour<NakamaApi>
         ServerDiscovery();
     }
 
+    void EarlyUpdate()
+    {
+
+    }
+
     private async void OnDestroy()
     {
 

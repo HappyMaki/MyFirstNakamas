@@ -19,10 +19,12 @@ public class UI_Input : MonoBehaviour
         {
             if (isOpened)
             {
+                MouseInit.SetCursorMenuMode(false);
                 popupOpener.ClosePopup();
             }
             else
             {
+                MouseInit.SetCursorMenuMode(true);
                 popupOpener.OpenPopup();
             }
             isOpened = !isOpened;

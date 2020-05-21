@@ -39,7 +39,7 @@ socket:
 
 session:
   encryption_key: "_|1[Tg0♥x&~jAU{B♦:>"
-  token_expiry_sec: 259200
+  token_expiry_sec: 259200 #Todo, some things much up and can't close properly when expiry token expires. Should renew token instead of setting high number
 
 social:
   steam:
