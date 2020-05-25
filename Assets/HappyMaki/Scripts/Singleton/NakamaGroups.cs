@@ -47,11 +47,18 @@ public class NakamaGroups : SingletonBehaviour<NakamaGroups>
         var result = await client.ListGroupUsersAsync(session, groupId, state:2, limit:100, cursor:null);
 
         playersOnline.Clear();
+        
         foreach (var ug in result.GroupUsers)
         {
             IApiUser g = ug.User;
-            playersOnline.Add(new OnlinePlayerInfo(g.Username, g.Id));
+            if (g.Online)
+                playersOnline.Add(new OnlinePlayerInfo(g.Username, g.Id));
             //Debug.LogFormat("User '{0}' role '{1}', '{2}'", g.Id, g.Username, g.Online);
+        }
+
+        if (playersOnline.Count == 0)
+        {
+            ListGroupMembers(online_players_group_id);
         }
     }
 
